@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слайд-шоу встречи однокурсников</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        #start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+
+        #start-screen.hidden {
+            display: none;
+        }
+
+        .start-box {
+            background: white;
+            padding: 80px 100px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        }
+
+        .start-box h1 {
+            color: #667eea;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .start-box p {
+            color: #666;
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+        }
+
+        #start-btn {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 25px 80px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        #start-btn:hover {
+            background: #16a34a;
+            transform: scale(1.05);
+        }
+
+        #loading-msg {
+            margin-top: 20px;
+            color: #999;
+            font-size: 1rem;
+            display: none;
+        }
+
+        #slideshow-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+
+        .text-slide {
+            text-align: center;
+            padding: 60px;
+        }
+
+        .title-slide h1 {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+        }
+
+        .title-slide p {
+            font-size: 2.2rem;
+            color: #ccc;
+        }
+
+        .intro-slide {
+            font-size: 2rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .list-slide h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: #667eea;
+        }
+
+        .list-slide ul {
+            text-align: left;
+            font-size: 1.4rem;
+            line-height: 2.2;
+            list-style: none;
+            columns: 2;
+            column-gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .list-slide li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            break-inside: avoid;
+        }
+
+        .list-slide li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 1.8rem;
+        }
+
+        .list-slide li.memorial {
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .list-slide li.memorial:before {
+            content: "✝";
+            color: #ffd700;
+        }
+
+        #controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            padding: 20px 40px;
+            border-radius: 50px;
+            display: none;
+            gap: 25px;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        #controls.visible {
+            display: flex;
+        }
+
+        button {
+            background: #667eea;
+            border: none;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #764ba2;
+            transform: scale(1.1);
+        }
+
+        #counter {
+            color: #fff;
+            font-size: 1.2rem;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        #progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            display: none;
+            z-index: 999;
+        }
+
+        #progress-bar.visible {
+            display: block;
+        }
+
+        #progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .config-note {
+            background: #f0f0f0;
+            color: #333;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .config-note h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .config-note code {
+            background: #e0e0e0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div id="start-screen">
+        <div class="start-box">
+            <h1>📸 Встреча однокурсников</h1>
+            <p>Слайд-шоу готово к показу</p>
+            <button id="start-btn">▶ Начать показ</button>
+            <div id="loading-msg">Загрузка файлов...</div>
+        </div>
+    </div>
+
+    <div id="slideshow-container"></div>
+
+    <div id="controls">
+        <button id="prev-btn">⏮ Назад</button>
+        <button id="play-pause-btn">⏸ Пауза</button>
+        <button id="next-btn">Вперёд ⏭</button>
+        <div id="counter">1 / 1</div>
+    </div>
+
+    <div id="progress-bar">
+        <div id="progress-fill"></div>
+    </div>
+
+    <audio id="background-music"></audio>
+
+    <script>
+        // ==========================================
+        // НАСТРОЙКИ: Укажите имена ваших файлов
+        // ==========================================
+        
+        // Список фотографий в папке photos/
+        const photoFiles = [
+            'photo1.jpg',
+            'photo2.jpg',
+            'photo3.jpg',
+            'photo4.jpg',
+            'photo5.jpg',
+            // Добавьте все ваши фото здесь
+        ];
+        
+        // Список музыкальных файлов в папке music/
+        const musicFiles = [
+            'song1.mp3',
+            'song2.mp3',
+            // Добавьте все ваши музыкальные файлы здесь
+        ];
+        
+        // Время показа одного слайда (в секундах)
+        const slideDuration = 20;
+        
+        // ==========================================
+        // КОД ПРОГРАММЫ (не изменяйте без необходимости)
+        // ==========================================
+        
+        let slides = [];
+        let currentSlide = 0;
+        let isPlaying = false;
+        let timer = null;
+        let currentMusicIndex = 0;
+        const slideTime = slideDuration * 1000;
+
+        const startScreen = document.getElementById('start-screen');
+        const container = document.getElementById('slideshow-container');
+        const controls = document.getElementById('controls');
+        const progressBar = document.getElementById('progress-bar');
+        const progressFill = document.getElementById('progress-fill');
+        const counter = document.getElementById('counter');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const music = document.getElementById('background-music');
+        const startBtn = document.getElementById('start-btn');
+        const loadingMsg = document.getElementById('loading-msg');
+
+        startBtn.addEventListener('click', function() {
+            loadingMsg.style.display = 'block';
+            startBtn.disabled = true;
+            
+            setTimeout(() => {
+                createSlides();
+                startScreen.classList.add('hidden');
+                controls.classList.add('visible');
+                progressBar.classList.add('visible');
+                showSlide(0);
+                play();
+                
+                // Загружаем и запускаем первый музыкальный файл
+                if (musicFiles.length > 0) {
+                    music.src = musicFiles[0];  // файлы в корне, без папки
+                    music.play().catch(e => {
+                        console.log('Для автозапуска музыки кликните в любом месте');
+                        document.body.addEventListener('click', () => music.play(), {once: true});
+                    });
+                }
+            }, 500);
+        });
+
+        // Переключение на следующий трек при окончании текущего
+        music.addEventListener('ended', function() {
+            if (musicFiles.length > 0) {
+                currentMusicIndex = (currentMusicIndex + 1) % musicFiles.length;
+                music.src = musicFiles[currentMusicIndex];  // файлы в корне, без папки
+                music.play().catch(e => console.log('Ошибка воспроизведения следующего трека:', e));
+            }
+        });
+
+        function createSlides() {
+            container.innerHTML = '';
+            
+            // Заглавный слайд
+            const titleSlide = document.createElement('div');
+            titleSlide.className = 'slide text-slide title-slide';
+            titleSlide.innerHTML = `
+                <div>
+                    <h1>Встреча однокурсников</h1>
+                    <p>Воспоминания о студенческих годах</p>
+                </div>
+            `;
+            container.appendChild(titleSlide);
+
+            // Вступление 1
+            const intro1 = document.createElement('div');
+            intro1.className = 'slide text-slide intro-slide';
+            intro1.innerHTML = `
+                <div>
+                    Дорогие друзья!<br><br>
+                    Мы снова вместе, чтобы вспомнить те незабываемые годы,<br>
+                    которые мы провели в стенах нашего университета.
+                </div>
+            `;
+            container.appendChild(intro1);
+
+            // Вступление 2
+            const intro2 = document.createElement('div');
+            intro2.className = 'slide text-slide intro-slide';
+            intro2.innerHTML = `
+                <div>
+                    Годы летят, но память о совместных лекциях,<br>
+                    экзаменах и весёлых моментах<br>
+                    навсегда остаётся в наших сердцах.
+                </div>
+            `;
+            container.appendChild(intro2);
+
+            // Фотографии
+            photoFiles.forEach(photoFile => {
+                const photoSlide = document.createElement('div');
+                photoSlide.className = 'slide';
+                const img = document.createElement('img');
+                img.src = photoFile;  // файлы в корне, без папки
+                img.onerror = function() {
+                    console.error('Не удалось загрузить фото:', photoFile);
+                };
+                photoSlide.appendChild(img);
+                container.appendChild(photoSlide);
+            });
+
+            // Список однокурсников
+            const listSlide = document.createElement('div');
+            listSlide.className = 'slide text-slide list-slide';
+            listSlide.innerHTML = `
+                <div>
+                    <h2>Наши однокурсники</h2>
+                    <ul>
+                        <li>Иванов Иван Петрович</li>
+                        <li>Петрова Мария Сергеевна</li>
+                        <li class="memorial">Сидоров Алексей Николаевич</li>
+                        <li>Козлова Елена Владимировна</li>
+                        <li>Смирнов Дмитрий Олегович</li>
+                        <li>Новикова Анна Ивановна</li>
+                        <li class="memorial">Морозов Сергей Петрович</li>
+                        <li>Соколова Ольга Васильевна</li>
+                    </ul>
+                </div>
+            `;
+            container.appendChild(listSlide);
+
+            // Финальный слайд
+            const finalSlide = document.createElement('div');
+            finalSlide.className = 'slide text-slide title-slide';
+            finalSlide.innerHTML = `
+                <div>
+                    <h1>Спасибо за внимание!</h1>
+                    <p>До новых встреч!</p>
+                </div>
+            `;
+            container.appendChild(finalSlide);
+
+            slides = document.querySelectorAll('.slide');
+            counter.textContent = `1 / ${slides.length}`;
+        }
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            currentSlide = index;
+            counter.textContent = `${index + 1} / ${slides.length}`;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressFill.style.width = progress + '%';
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                showSlide(currentSlide + 1);
+            } else {
+                showSlide(0);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            } else {
+                showSlide(slides.length - 1);
+            }
+        }
+
+        function play() {
+            isPlaying = true;
+            playPauseBtn.textContent = '⏸ Пауза';
+            timer = setInterval(nextSlide, slideTime);
+            if (music.src && music.paused) {
+                music.play().catch(e => console.log('Ошибка воспроизведения:', e));
+            }
+        }
+
+        function pause() {
+            isPlaying = false;
+            playPauseBtn.textContent = '▶ Играть';
+            clearInterval(timer);
+            if (music.src && !music.paused) {
+                music.pause();
+            }
+        }
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            prevSlide();
+            if (isPlaying) {
+                pause();
+                play();
+            }
+        });
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            nextSlide();
+            if (isPlaying) {
+                pause();
+                play();
+            }
+        });
+
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                pause();
+            } else {
+                play();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!startScreen.classList.contains('hidden')) return;
+            
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+                if (isPlaying) {
+                    pause();
+                    play();
+                }
+            }
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+                if (isPlaying) {
+                    pause();
+                    play();
+                }
+            }
+            if (e.key === ' ') {
+                e.preventDefault();
+                if (isPlaying) pause();
+                else play();
+            }
+        });
+    </script>
+</body>
+</html>
