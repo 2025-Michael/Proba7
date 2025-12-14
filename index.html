@@ -539,10 +539,34 @@
                 container.appendChild(photoSlide);
             });
 
-            // Список однокурсников
-            const listSlide = document.createElement('div');
-            listSlide.className = 'slide text-slide list-slide';
-            listSlide.innerHTML = `
+             // Слайд перед списком 1
+            const preList1 = document.createElement('div');
+            preList1.className = 'slide text-slide intro-slide';
+            preList1.innerHTML = `
+                <div>
+                    А теперь давайте вспомним всех,<br>
+                    кто прошёл этот путь вместе с нами.<br><br>
+                    Наших друзей, коллег, однокурсников.
+                </div>
+            `;
+            container.appendChild(preList1);
+
+            // Слайд перед списком 2
+            const preList2 = document.createElement('div');
+            preList2.className = 'slide text-slide intro-slide';
+            preList2.innerHTML = `
+                <div>
+                    Каждый из нас оставил свой след<br>
+                    в истории нашего курса.<br><br>
+                    Светлая память тем, кто ушёл...
+                </div>
+            `;
+            container.appendChild(preList2);
+
+            // Список однокурсников - Слайд 1 (с заголовком)
+            const listSlide1 = document.createElement('div');
+            listSlide1.className = 'slide text-slide list-slide';
+            listSlide1.innerHTML = `
                 <div>
                     <h2>Наши однокурсники</h2>
                     <ul>
@@ -554,10 +578,145 @@
                         <li>Новикова Анна Ивановна</li>
                         <li class="memorial">Морозов Сергей Петрович</li>
                         <li>Соколова Ольга Васильевна</li>
+                        <li>Волков Александр Юрьевич</li>
+                        <li>Белова Татьяна Михайловна</li>
+                        <li>Орлов Павел Сергеевич</li>
+                        <li>Зайцева Наталья Викторовна</li>
+                        <li>Медведев Игорь Владимирович</li>
+                        <li>Лебедева Екатерина Андреевна</li>
+                        <li>Попов Денис Александрович</li>
+                        <li>Соловьёва Людмила Ивановна</li>
                     </ul>
                 </div>
             `;
-            container.appendChild(listSlide);
+            container.appendChild(listSlide1);
+
+            // Список однокурсников - Слайд 2
+            const listSlide2 = document.createElement('div');
+            listSlide2.className = 'slide text-slide list-slide';
+            listSlide2.innerHTML = `
+                <div>
+                    <ul>
+                        <li>Васильев Сергей Николаевич</li>
+                        <li>Михайлова Ирина Павловна</li>
+                        <li>Фёдоров Андрей Викторович</li>
+                        <li class="memorial">Алексеева Марина Дмитриевна</li>
+                        <li>Николаев Владимир Олегович</li>
+                        <li>Романова Светлана Анатольевна</li>
+                        <li>Семёнов Юрий Петрович</li>
+                        <li>Григорьева Валентина Сергеевна</li>
+                        <li>Степанов Максим Игоревич</li>
+                        <li>Павлова Ольга Владимировна</li>
+                        <li>Егоров Виктор Михайлович</li>
+                        <li>Захарова Анастасия Юрьевна</li>
+                        <li>Кузнецов Роман Александрович</li>
+                        <li>Борисова Галина Николаевна</li>
+                        <li>Яковлев Константин Иванович</li>
+                        <li>Тимофеева Надежда Петровна</li>
+                    </ul>
+                </div>
+            `;
+            container.appendChild(listSlide2);
+
+            // Список однокурсников - Слайд 3
+            const listSlide3 = document.createElement('div');
+            listSlide3.className = 'slide text-slide list-slide';
+            listSlide3.innerHTML = `
+                <div>
+                    <ul>
+                        <li>Макаров Евгений Сергеевич</li>
+                        <li>Антонова Юлия Александровна</li>
+                        <li>Ковалёв Артём Владимирович</li>
+                        <li>Данилова Вера Ивановна</li>
+                        <li class="memorial">Жуков Алексей Петрович</li>
+                        <li>Крылова Лариса Михайловна</li>
+                        <li>Соболев Олег Николаевич</li>
+                        <li>Комарова Елена Сергеевна</li>
+                        <li>Новиков Геннадий Васильевич</li>
+                        <li>Филиппова Марина Юрьевна</li>
+                        <li>Громов Дмитрий Андреевич</li>
+                        <li>Савельева Инна Владимировна</li>
+                        <li>Трофимов Игорь Олегович</li>
+                        <li>Куликова Тамара Петровна</li>
+                        <li>Моисеев Борис Иванович</li>
+                        <li>Белоусова Раиса Николаевна</li>
+                    </ul>
+                </div>
+            `;
+            container.appendChild(listSlide3);
+
+            // Список однокурсников - Слайд 4
+            const listSlide4 = document.createElement('div');
+            listSlide4.className = 'slide text-slide list-slide';
+            listSlide4.innerHTML = `
+                <div>
+                    <ul>
+                        <li>Сергеев Вячеслав Михайлович</li>
+                        <li>Королёва Жанна Викторовна</li>
+                        <li>Баранов Леонид Александрович</li>
+                        <li>Осипова Зоя Дмитриевна</li>
+                        <li>Власов Станислав Юрьевич</li>
+                        <li>Панова Регина Сергеевна</li>
+                        <li class="memorial">Назаров Валерий Петрович</li>
+                        <li>Терентьева Нина Ивановна</li>
+                        <li>Калинин Пётр Васильевич</li>
+                        <li>Виноградова Алла Николаевна</li>
+                        <li>Щербаков Геннадий Олегович</li>
+                        <li>Фролова Клавдия Андреевна</li>
+                        <li>Богданов Анатолий Михайлович</li>
+                        <li>Никитина Лидия Павловна</li>
+                        <li>Голубев Эдуард Владимирович</li>
+                        <li>Гусева Маргарита Игоревна</li>
+                    </ul>
+                </div>
+            `;
+            container.appendChild(listSlide4);
+
+            // Список однокурсников - Слайд 5
+            const listSlide5 = document.createElement('div');
+            listSlide5.className = 'slide text-slide list-slide';
+            listSlide5.innerHTML = `
+                <div>
+                    <ul>
+                        <li>Лазарев Николай Сергеевич</li>
+                        <li>Богомолова Вероника Юрьевна</li>
+                        <li>Афанасьев Григорий Иванович</li>
+                        <li>Дроздова Любовь Петровна</li>
+                        <li>Кириллов Владислав Николаевич</li>
+                        <li>Зимина Полина Александровна</li>
+                        <li>Прохоров Руслан Викторович</li>
+                        <li>Кудрявцева Майя Дмитриевна</li>
+                        <li class="memorial">Денисов Леонид Олегович</li>
+                        <li>Воронцова Софья Михайловна</li>
+                        <li>Блинов Тимур Андреевич</li>
+                        <li>Калашникова Виктория Сергеевна</li>
+                        <li>Мельников Артур Владимирович</li>
+                        <li>Шестакова Диана Игоревна</li>
+                        <li>Гордеев Кирилл Юрьевич</li>
+                        <li>Воробьёва Алина Петровна</li>
+                    </ul>
+                </div>
+            `;
+            container.appendChild(listSlide5);
+
+            // Список однокурсников - Слайд 6
+            const listSlide6 = document.createElement('div');
+            listSlide6.className = 'slide text-slide list-slide';
+            listSlide6.innerHTML = `
+                <div>
+                    <ul>
+                        <li>Титов Илья Николаевич</li>
+                        <li>Цветкова Кристина Александровна</li>
+                        <li>Князев Даниил Сергеевич</li>
+                        <li>Субботина Евгения Владимировна</li>
+                        <li>Голубков Матвей Игоревич</li>
+                        <li>Лаврова Камилла Юрьевна</li>
+						<li>Дроздова Любовь Петровна</li>
+                        <li>Кириллов Владислав Николаевич</li>
+                    </ul>
+                </div>
+            `;
+            container.appendChild(listSlide6);
 
             // Финальный слайд
             const finalSlide = document.createElement('div');
@@ -671,6 +830,7 @@
     </script>
 </body>
 </html>
+
 
 
 
