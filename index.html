@@ -267,6 +267,110 @@
             border-radius: 3px;
             font-family: monospace;
         }
+		
+		 /* Адаптация для мобильных устройств */
+        @media (max-width: 768px) {
+            .start-box {
+                padding: 40px 30px;
+                margin: 20px;
+            }
+
+            .start-box h1 {
+                font-size: 2rem;
+            }
+
+            .start-box p {
+                font-size: 1rem;
+            }
+
+            #start-btn {
+                padding: 18px 40px;
+                font-size: 1.2rem;
+            }
+
+            .title-slide h1 {
+                font-size: 2.5rem;
+            }
+
+            .title-slide p {
+                font-size: 1.3rem;
+            }
+
+            .intro-slide {
+                font-size: 1.2rem;
+                padding: 30px 20px;
+            }
+
+            .list-slide h2 {
+                font-size: 2rem;
+            }
+
+            .list-slide ul {
+                columns: 1;
+                font-size: 1.1rem;
+                line-height: 1.8;
+                padding: 0 20px;
+            }
+
+            .list-slide li {
+                padding-left: 25px;
+                margin-bottom: 10px;
+            }
+
+            .list-slide li:before {
+                font-size: 1.3rem;
+            }
+
+            #controls {
+                padding: 12px 20px;
+                gap: 15px;
+                bottom: 20px;
+                flex-wrap: wrap;
+            }
+
+            button {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            #counter {
+                font-size: 1rem;
+                min-width: 70px;
+            }
+
+            .slide img {
+                max-width: 98%;
+                max-height: 90%;
+            }
+        }
+
+        /* Дополнительная адаптация для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .start-box h1 {
+                font-size: 1.5rem;
+            }
+
+            .title-slide h1 {
+                font-size: 1.8rem;
+            }
+
+            .intro-slide {
+                font-size: 1rem;
+            }
+
+            .list-slide h2 {
+                font-size: 1.5rem;
+            }
+
+            .list-slide ul {
+                font-size: 0.95rem;
+            }
+
+            button {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
