@@ -441,135 +441,22 @@
         
         // Список фотографий (порядок не важен - автоматически отсортируются!)
         const photoFiles = [
-    'P5220444.JPG',
-    'P5220445.JPG',
-    'P5220446.JPG',
-    'P5220447.JPG',
-    'P5220448.JPG',
-    'P5220449.JPG',
-    'P5220450.JPG',
-    'P5220451.JPG',
-    'P5220452.JPG',
-    'P5220453.JPG',
-    'P5220454.JPG',
-    'P5220455.JPG',
-    'P5220456.JPG',
-    'P5220457.JPG',
-    'P5220458.JPG',
-    'P5220459.JPG',
-    'P5220460.JPG',
-    'P5220461.JPG',
-    'P5220462.JPG',
-    'P5220463.JPG',
-    'P5220464.JPG',
-    'P5220465.JPG',
-    'P5220466.JPG',
-    'P5220467.JPG',
-    'P5220468.JPG',
-    'P5220469.JPG',
-    'P5220470.JPG',
-    'P5220471.JPG',
-    'P5220472.JPG',
-    'P5220473.JPG',
-    'P5220474.JPG',
-    'P5220475.JPG',
-    'P5220476.JPG',
-    'P5220477.JPG',
-    'P5220478.JPG',
-    'P5220479.JPG',
-    'P5220480.JPG',
-    'P5220481.JPG',
-    'P5220482.JPG',
-    'P5220483.JPG',
-    'P5220484.JPG',
-    'P5220485.JPG',
-    'P5220486.JPG',
-    'P5220487.JPG',
-    'P5220488.JPG',
-    'P5220489.JPG',
-    'P5220490.JPG',
-    'P5220491.JPG',
-    'P5220492.JPG',
-    'P5220493.JPG',
-    'P5220494.JPG',
-    'P5220495.JPG',
-    'P5220496.JPG',
-    'P5220497.JPG',
-    'P5220498.JPG',
-    'P5220499.JPG',
-    'P5220500.JPG',
-    'P5220501.JPG',
-    'P5220503.JPG',
-    'P5220504.JPG',
-    'P5220505.JPG',
-    'P5220506.JPG',
-    'P5220507.JPG',
-    'P5220508.JPG',
-    'P5220509.JPG',
-    'P5220510.JPG',
-    'P5220511.JPG',
-    'P5220512.JPG',
-    'P5220513.JPG',
-    'P5220514.JPG',
-    'P5220515.JPG',
-    'P5220516.JPG',
-    'P5220517.JPG',
-    'P5220518.JPG',
-    'P5220519.JPG',
-    'P5220520.JPG',
-    'P5220521.JPG',
-    'P5220522.JPG',
-    'P5220523.JPG',
-    'P5220524.JPG',
-    'P5220525.JPG',
-    'P5220526.JPG',
-    'P5220527.JPG',
-    'P5220528.JPG',
-    'P5220529.JPG',
-    'P5220530.JPG',
-    'P5230531.JPG',
-    'P5230533.JPG',
-    'P5230540.JPG',
-    'P5230541.JPG',
-    'P5230542.JPG',
-    'P5230543.JPG',
-    'P5230544.JPG',
-    'P5230545.jpg',
-    'P5230546.JPG',
-    'P5230547.JPG',
-    'P5230548.JPG',
-    'P5230549.JPG',
-    'P5230550.JPG',
-    'P5230551.JPG',
-    'P5230552.JPG',
-    'P5230553.JPG',
-    'P5230554.JPG',
-    'P5230555.JPG',
-    'P5230556.JPG',
-];
+            'P5220444.JPG',
+            'P5220450.JPG',
+            'P5220461.JPG',
+            // Добавьте все ваши 105 фото здесь
+            // Порядок не важен - они отсортируются автоматически!
+        ];
         
         // Автоматическая сортировка фото по имени
         photoFiles.sort();
         
         // Список музыкальных файлов (будут играть в указанном порядке)
         const musicFiles = [
-             'mozart-eine-kleine-nachtmusik-serenade-no-13-kv-525-175691.mp3',  
-			'20-vot_uhodit_nashe_vremya.mp3',
-            '17-spokoino_druzhishe_spokoino.mp3',
-			'country-nights-441168.mp3',
-			'mozart-rondo-alla-turca-concert-grand-version-227458.mp3',
-			 '1-04 Ob-La-Di, Ob-La-Da.mp3',
-			'legacy-of-brahms-hungarian-dance-no5-fun-background-dance-music-191255.mp3',
-			'19-napolnim_muzykoi_serdtca.mp3',
-			'symphonie-der-menschheit-201942.mp3',
-			'1-01 Back In The USSR.mp3',
-            '09-pesnya_aljpinistov.mp3',
-			'for-elise-prelude-beethoven-classic-grand-piano-music-1124.mp3',
-			'1-11 Blackbird.mp3 ',
-			'my artist friend.mp3',
+            'song1.mp3',
+            'song2.mp3',
             // Добавьте все ваши музыкальные файлы здесь
         ];
-
         
         // Время показа одного слайда (в секундах)
         const slideDuration = 20;
@@ -637,9 +524,8 @@
             titleSlide.className = 'slide text-slide title-slide';
             titleSlide.innerHTML = `
                 <div>
-                    <h1>Встреча выпускников ФТФ-79 ХГУ</h1>
-        <h1>25 лет спустя</h1>
-    <p class="date-place">22 мая 2004 года, Харьков</p>
+                    <h1>Встреча однокурсников</h1>
+                    <p>Воспоминания о студенческих годах</p>
                 </div>
             `;
             container.appendChild(titleSlide);
@@ -650,9 +536,8 @@
             intro1.innerHTML = `
                 <div>
                     Дорогие друзья!<br><br>
-                    Тут представлены фотографии с нашей встречи через четверть века после окончания университета.<br>
-                    И всё это время мы шли разными дорогами,<br>
-					но начинали-то с одной аудитории.
+                    Мы снова вместе, чтобы вспомнить те незабываемые годы,<br>
+                    которые мы провели в стенах нашего университета.
                 </div>
             `;
             container.appendChild(intro1);
@@ -662,11 +547,9 @@
             intro2.className = 'slide text-slide intro-slide';
             intro2.innerHTML = `
                 <div>
-                    Здесь мы снова собрались вместе,<br>
-                    Чтобы вспомнить,<br>
-                    Узнать друг друга,<br>
-					Улыбнуться,<br>
-					И просто побыть рядом.
+                    Годы летят, но память о совместных лекциях,<br>
+                    экзаменах и весёлых моментах<br>
+                    навсегда остаётся в наших сердцах.
                 </div>
             `;
             container.appendChild(intro2);
@@ -684,7 +567,7 @@
                 container.appendChild(photoSlide);
             });
 
-             // Слайд перед списком 1
+            // Слайд перед списком 1
             const preList1 = document.createElement('div');
             preList1.className = 'slide text-slide intro-slide';
             preList1.innerHTML = `
@@ -715,173 +598,131 @@
                 <div>
                     <h2>Наши однокурсники</h2>
                     <ul>
-                        <li>Авилов Анатолий</li>
-                        <li>Андрусенко Николай</li>
-                        <li>Антонов Сергей</li>
-                        <li>Бабенко Виктор</li>
-                        <li>Баранник Евгений</li>
-                        <li>Богданов Евгений</li>
-                        <li>Бодров Александр</li>
-                        <li class="memorial">Брезинский Борис</li>
-                        <li>Бровин Александр</li>
-                        <li>Бышкин Сергей</li>
-                        <li>Ванжа Александр</li>
-                        <li>Волков Юрий</li>
-                        </ul>
+                        <li>Иванов Иван Петрович</li>
+                        <li>Петрова Мария Сергеевна</li>
+                        <li class="memorial">Сидоров Алексей Николаевич</li>
+                        <li>Козлова Елена Владимировна</li>
+                        <li>Смирнов Дмитрий Олегович</li>
+                        <li>Новикова Анна Ивановна</li>
+                        <li class="memorial">Морозов Сергей Петрович</li>
+                        <li>Соколова Ольга Васильевна</li>
+                        <li>Волков Александр Юрьевич</li>
+                        <li>Белова Татьяна Михайловна</li>
+                        <li>Орлов Павел Сергеевич</li>
+                        <li>Зайцева Наталья Викторовна</li>
+                       </ul>
                 </div>
             `;
             container.appendChild(listSlide1);
-			
-			 // Список однокурсников - Слайд 2
+
+            // Список однокурсников - Слайд 2
             const listSlide2 = document.createElement('div');
             listSlide2.className = 'slide text-slide list-slide';
             listSlide2.innerHTML = `
                 <div>
                     <ul>
-                        <li>Волков Юрий</li>
-                        <li>Воробьёв Василий</li>
-                        <li>Воронко Владимир</li>
-                        <li>Гирнык Сергей</li>
-						<li class="memorial">Голубенко Александр</li>
-                        <li>Голубь Николай</li>
-                        <li>Грицына Виктор</li>
-                        <li class="memorial">Деревянко Валерий</li>
-                        <li>Дзеньковский Владимир</li>
-                        <li>Дубинко Владимир</li>
-                        <li class="memorial">Дубина Владимир</li>
-                        <li>Жучков Сергей</li>
-                    </ul>
+                        <li>Васильев Сергей Николаевич</li>
+                        <li>Михайлова Ирина Павловна</li>
+                        <li>Фёдоров Андрей Викторович</li>
+                        <li class="memorial">Алексеева Марина Дмитриевна</li>
+                        <li>Николаев Владимир Олегович</li>
+                        <li>Романова Светлана Анатольевна</li>
+                        <li>Семёнов Юрий Петрович</li>
+                        <li>Григорьева Валентина Сергеевна</li>
+                        <li>Степанов Максим Игоревич</li>
+                        <li>Павлова Ольга Владимировна</li>
+                        <li>Егоров Виктор Михайлович</li>
+                        <li>Захарова Анастасия Юрьевна</li>
+                        </ul>
                 </div>
-			`;
+            `;
             container.appendChild(listSlide2);
 
             // Список однокурсников - Слайд 3
-            const listSlide2 = document.createElement('div');
-            listSlide2.className = 'slide text-slide list-slide';
-            listSlide2.innerHTML = `
-                <div>
-                    <ul>
-                        <li>Забелин Евгений</li>
-                        <li>Зинченко Василий</li>
-                        <li>Иванов Павел</li>
-                        <li>Иванчук Василий</li>
-                        <li>Ивашов Николай</li>
-                        <li class="memorial">Инопин Андрей</li>
-                        <li>Калентьев Сергей</li>
-                        <li>Кнутарев Сергей</li>
-						<li>Кныш Анатолий</li>
-                        <li>Козачёк Александр</li>
-                        <li>Кокадий Виталий</li>
-                        <li>Котляр Владимир</li>
-                    </ul>
-                </div>
-            `;
-            container.appendChild(listSlide3);
-
-            // Список однокурсников - Слайд 4
             const listSlide3 = document.createElement('div');
             listSlide3.className = 'slide text-slide list-slide';
             listSlide3.innerHTML = `
                 <div>
                     <ul>
-                        <li class="memorial">Кощий Евгений</li>
-                        <li>Кладковой Петр</li>
-                        <li>Клименко Александр</li>
-                        <li class="memorial">Климко Сергей</li>
-                        <li>Клушин Николай</li>
-                        <li class="memorial">Кропотов Николай</li> 
-                        <li>Куприянов Анатолий</li>
-                        <li>Линенко-Мельников Игорь</li>
-                        <li class="memorial">Лихачёв Николай</li>
-                        <li>Ляшко Юрий</li>
-                        <li>Маслов Василий</li>
-						<li>Мироненко Виктор</li>
-					</ul>
+                        <li>Макаров Евгений Сергеевич</li>
+                        <li>Антонова Юлия Александровна</li>
+                        <li>Ковалёв Артём Владимирович</li>
+                        <li>Данилова Вера Ивановна</li>
+                        <li class="memorial">Жуков Алексей Петрович</li>
+                        <li>Крылова Лариса Михайловна</li>
+                        <li>Соболев Олег Николаевич</li>
+                        <li>Комарова Елена Сергеевна</li>
+                        <li>Новиков Геннадий Васильевич</li>
+                        <li>Филиппова Марина Юрьевна</li>
+                        <li>Громов Дмитрий Андреевич</li>
+                        <li>Савельева Инна Владимировна</li>
+                        </ul>
+                </div>
+            `;
+            container.appendChild(listSlide3);
+
+            // Список однокурсников - Слайд 4
+            const listSlide4 = document.createElement('div');
+            listSlide4.className = 'slide text-slide list-slide';
+            listSlide4.innerHTML = `
+                <div>
+                    <ul>
+                        <li>Сергеев Вячеслав Михайлович</li>
+                        <li>Королёва Жанна Викторовна</li>
+                        <li>Баранов Леонид Александрович</li>
+                        <li>Осипова Зоя Дмитриевна</li>
+                        <li>Власов Станислав Юрьевич</li>
+                        <li>Панова Регина Сергеевна</li>
+                        <li class="memorial">Назаров Валерий Петрович</li>
+                        <li>Терентьева Нина Ивановна</li>
+                        <li>Калинин Пётр Васильевич</li>
+                        <li>Виноградова Алла Николаевна</li>
+                        <li>Щербаков Геннадий Олегович</li>
+                        <li>Фролова Клавдия Андреевна</li>
+                        </ul>
                 </div>
             `;
             container.appendChild(listSlide4);
-			
-			 // Список однокурсников - Слайд 5
-            const listSlide4 = document.createElement('div');
-            listSlide4.className = 'slide text-slide list-slide';
-            listSlide4.innerHTML = `
-                <div>
-                    <ul>
-                        <li>Михайленко Александр</li>
-                        <li class="memorial">Мишура Николай</li>
-                        <li class="memorial">Морозов Иван</li>
-                        <li class="memorial">Нагайченко Валерий</li>
-                        <li>Никитин Аркадий</li>
-                        <li>Онищенко Евгений</li>
-                        <li>Орлов Сергей</li>
-                        <li class="memorial">Панасенко Александр</li>
-                        <li>Парфёнов Анатолий</li>
-                        <li class="memorial">Пащенко Сергей</li>
-                        <li>Пащук Сергей</li>
-                        <li>Поляков Николай</li>
-                       </ul>
-                </div>
-            `;
-            container.appendChild(listSlide5);
 
-            // Список однокурсников - Слайд 6
-            const listSlide4 = document.createElement('div');
-            listSlide4.className = 'slide text-slide list-slide';
-            listSlide4.innerHTML = `
-                <div>
-                    <ul>
-                        <li class="memorial">Плахотник Владимир</li>
-                        <li class="memorial">Райдам Дмитрий</li>
-                        <li class="memorial">Рыбалов Валентин</li>
-						<li>Руденко Сергей</li>
-					   <li>Русинов Николай</li>
-                        <li>Рябчиков Дмитрий</li>
-                        <li>Санин Анатолий</li>
-                        <li>Симоненко Александр</li>
-                        <li>Сотников Владимир</li>
-                        <li class="memorial">Сушко Иван</li>
-                        <li>Талецкий Юрий</li>
-                        <li>Тарасов Александр</li>
-                    </ul>
-                </div>
-            `;
-            container.appendChild(listSlide6);
-
-            // Список однокурсников - Слайд 7
+            // Список однокурсников - Слайд 5
             const listSlide5 = document.createElement('div');
             listSlide5.className = 'slide text-slide list-slide';
             listSlide5.innerHTML = `
                 <div>
                     <ul>
-                        <li>Третьяк Игорь</li>
-                        <li class="memorial">Толкунов Михаил</li>
-                        <li>Туркин Анатолий</li>
-                        <li>Туркин Юрий</li>
-                        <li class="memorial">Филипенко Александр</li>
-                        <li class="memorial">Черный Александр</li>
-                        <li>Шатнев Михаил</li>
-                        <li>Шергин Георгий</li>
-						<li>Штангеев Борис</li>
-                        <li>Шолкин Александр</li>
-                        <li class="memorial">Шулаев Геннадий</li>
-                        <li>Щербинка Сергей</li>
-                    </ul>
+                        <li>Лазарев Николай Сергеевич</li>
+                        <li>Богомолова Вероника Юрьевна</li>
+                        <li>Афанасьев Григорий Иванович</li>
+                        <li>Дроздова Любовь Петровна</li>
+                        <li>Кириллов Владислав Николаевич</li>
+                        <li>Зимина Полина Александровна</li>
+                        <li>Прохоров Руслан Викторович</li>
+                        <li>Кудрявцева Майя Дмитриевна</li>
+                        <li class="memorial">Денисов Леонид Олегович</li>
+                        <li>Воронцова Софья Михайловна</li>
+                        <li>Блинов Тимур Андреевич</li>
+                        <li>Калашникова Виктория Сергеевна</li>
+                        </ul>
                 </div>
             `;
-            container.appendChild(listSlide7);
+            container.appendChild(listSlide5);
 
-            // Список однокурсников - Слайд 8
+            // Список однокурсников - Слайд 6
             const listSlide6 = document.createElement('div');
             listSlide6.className = 'slide text-slide list-slide';
             listSlide6.innerHTML = `
                 <div>
                     <ul>
-                       <li>Юрченко Валерий</li>
-                        <li>Яровой Николай</li>
-						</ul>
+                        <li>Титов Илья Николаевич</li>
+                        <li>Цветкова Кристина Александровна</li>
+                        <li>Князев Даниил Сергеевич</li>
+                        <li>Субботина Евгения Владимировна</li>
+                        <li>Голубков Матвей Игоревич</li>
+                        <li>Лаврова Камилла Юрьевна</li>
+                    </ul>
                 </div>
             `;
-            container.appendChild(listSlide8);
+            container.appendChild(listSlide6);
 
             // Финальный слайд
             const finalSlide = document.createElement('div');
@@ -995,16 +836,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
