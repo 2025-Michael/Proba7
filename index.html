@@ -158,17 +158,23 @@
         }
 
         .list-slide ul {
-            text-align: left;
-            font-size: 1.3rem;
-            line-height: 1.9;
-            list-style: none;
-            columns: 2;
-            column-gap: 60px;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-            word-break: break-word;
-        }
+    text-align: left;
+    font-size: 1.3rem;
+    line-height: 1.9;
+    list-style: none;
+    columns: 2;
+    column-gap: 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    /* Запрещаем переносы */
+    word-break: keep-all;
+    overflow-wrap: normal;
+    white-space: normal;
+    hyphens: none;
+}
+
 
         .list-slide li {
             margin-bottom: 8px;
@@ -258,6 +264,40 @@
             width: 0%;
             transition: width 0.5s;
         }
+		/* Мобильная версия */
+@media (max-width: 600px) {
+
+    .list-slide ul {
+        columns: 1;
+        font-size: 1.4rem;
+        line-height: 2.0;
+        padding: 0 10px;
+    }
+
+    .list-slide li {
+        margin-bottom: 12px;
+    }
+
+    .intro-slide {
+        font-size: 1.6rem;
+        line-height: 1.7;
+        padding: 20px;
+    }
+
+    .title-slide h1 {
+        font-size: 3rem;
+    }
+
+    .title-slide p {
+        font-size: 1.5rem;
+    }
+}
+@media (min-width: 1200px) {
+    .list-slide ul {
+        font-size: 1.4rem;
+        column-gap: 80px;
+    }
+}
     </style>
 </head>
 <body>
