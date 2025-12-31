@@ -682,6 +682,13 @@
     }
 
     function nextSlide() {
+	        if (currentSlide < slides.length - 1) {
+            showSlide(currentSlide + 1);
+        } else {
+            showSlide(0);
+        }
+    }
+
     // ==========================================
     // Переключение назад
     // ==========================================
