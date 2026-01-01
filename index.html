@@ -286,14 +286,14 @@
             width: 0%;
             transition: width 0.5s;
         }
-		/* Мобильная версия */
+	/* Мобильная версия */
 @media (max-width: 600px) {
 
     /* Текстовые слайды — чтобы ничего не обрезалось */
     .text-slide {
         max-height: 100vh;
         overflow-y: auto;
-        padding: 10px;
+        padding: 20px 15px; /* уменьшено, чтобы не было переполнения */
     }
 
     .text-slide > div {
@@ -301,15 +301,17 @@
         overflow-y: auto;
     }
 
-    /* Заглавный слайд — чтобы "ВЫПУСКНИКОВ" не обрезался */
+    /* Заглавный слайд — чтобы "Встреча однокурсников" не обрезался */
     .title-slide {
         padding: 10px;
     }
 
     .title-slide h1 {
-        font-size: 2.2rem;
-        line-height: 1.1;
-        margin-bottom: 10px;
+        font-size: 2.4rem; /* вместо 5rem */
+        line-height: 1.2;
+        padding: 0 5px; /* защита от обрезания слева/справа */
+        white-space: normal;
+        word-break: break-word;
     }
 
     .title-slide p {
@@ -368,7 +370,7 @@
     .controls {
         bottom: 8px;
         padding: 0 10px;
-        width: calc(100% - 20px);
+        width: calc(100% - 20px); /* чтобы не вылазило за края */
     }
 
     /* Все кнопки: Назад, Играть, Вперёд */
