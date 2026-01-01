@@ -323,21 +323,20 @@
         padding: 20px;
     }
 
-    /* Заголовок списков — чтобы "однокурсники" не обрезался */
+    /* Заголовок списков */
     .list-slide h2 {
         font-size: 2rem;
         margin-bottom: 20px;
         padding: 0;
     }
 
-    /* Списки — одна колонка, крупно, без переносов */
+    /* Списки — одна колонка */
     .list-slide ul {
         columns: 1;
         font-size: 1.4rem;
         line-height: 2.0;
         padding: 0 10px;
 
-        /* Запрещаем переносы */
         word-break: keep-all;
         overflow-wrap: normal;
         white-space: normal;
@@ -346,8 +345,59 @@
 
     .list-slide li {
         margin-bottom: 12px;
+        position: relative;
+        padding-left: 22px;
+    }
+
+    .list-slide li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        top: 0.2rem;
+        color: #667eea;
+        font-size: 1.6rem;
+        line-height: 1;
+    }
+
+    .list-slide li.memorial::before {
+        content: "✝";
+        color: #ffd700;
+    }
+
+    /* Панель управления */
+    .controls {
+        bottom: 8px;
+        padding: 0 10px;
+        width: calc(100% - 20px);
+    }
+
+    /* Все кнопки: Назад, Играть, Вперёд */
+    #prevBtn, #playPauseBtn, #nextBtn {
+        font-size: 1.2rem;
+        padding: 6px 10px;
+        min-width: 60px;
+    }
+
+    /* Счётчик слайдов */
+    #slideCounter {
+        font-size: 1.1rem;
+        padding: 4px 8px;
+        margin: 0 6px;
+    }
+
+    /* Более мягкая анимация на телефоне */
+    .slide {
+        transform: translateY(26px) scale(0.95);
+        transition:
+            opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .slide.active {
+        transform: translateY(0) scale(1);
     }
 }
+
     </style>
 </head>
 <body>
