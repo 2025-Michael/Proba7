@@ -91,16 +91,29 @@
             background: #000;
         }
 
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
+    /* Кинематографичный fade + zoom + fade-up */
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Исходное состояние */
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+    transition:
+        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Активный слайд */
+.slide.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    z-index: 1;
+}
 
         .slide.active {
             opacity: 1;
@@ -183,13 +196,22 @@
             break-inside: avoid;
         }
 
-        .list-slide li:before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-size: 1.8rem;
-        }
+        /* Единый стиль для всех кружков */
+.list-slide li {
+    position: relative;
+    padding-left: 22px;
+}
+
+.list-slide li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+    color: #667eea; /* твой оригинальный цвет */
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
 
         .list-slide li.memorial {
             color: #ffd700;
@@ -267,35 +289,63 @@
 		/* Мобильная версия */
 @media (max-width: 600px) {
 
-    .list-slide ul {
-        columns: 1;
-        font-size: 1.4rem;
-        line-height: 2.0;
-        padding: 0 10px;
+    /* Текстовые слайды — чтобы ничего не обрезалось */
+    .text-slide {
+        max-height: 100vh;
+        overflow-y: auto;
+        padding: 10px;
     }
 
-    .list-slide li {
-        margin-bottom: 12px;
+    .text-slide > div {
+        max-height: 100%;
+        overflow-y: auto;
     }
 
+    /* Заглавный слайд — чтобы "ВЫПУСКНИКОВ" не обрезался */
+    .title-slide {
+        padding: 10px;
+    }
+
+    .title-slide h1 {
+        font-size: 2.2rem;
+        line-height: 1.1;
+        margin-bottom: 10px;
+    }
+
+    .title-slide p {
+        font-size: 1.2rem;
+    }
+
+    /* Вступительные слайды */
     .intro-slide {
         font-size: 1.6rem;
         line-height: 1.7;
         padding: 20px;
     }
 
-    .title-slide h1 {
-        font-size: 3rem;
+    /* Заголовок списков — чтобы "однокурсники" не обрезался */
+    .list-slide h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        padding: 0;
     }
 
-    .title-slide p {
-        font-size: 1.5rem;
-    }
-}
-@media (min-width: 1200px) {
+    /* Списки — одна колонка, крупно, без переносов */
     .list-slide ul {
+        columns: 1;
         font-size: 1.4rem;
-        column-gap: 80px;
+        line-height: 2.0;
+        padding: 0 10px;
+
+        /* Запрещаем переносы */
+        word-break: keep-all;
+        overflow-wrap: normal;
+        white-space: normal;
+        hyphens: none;
+    }
+
+    .list-slide li {
+        margin-bottom: 12px;
     }
 }
     </style>
@@ -513,7 +563,7 @@
         `;
         container.appendChild(preList2);
 
-        // --- Список 1 ---
+                // --- Список 1 ---
         const listSlide1 = document.createElement('div');
         listSlide1.className = 'slide text-slide list-slide';
         listSlide1.innerHTML = `
@@ -528,25 +578,38 @@
                     <li>Богданов Евгений</li>
                     <li>Бодров Александр</li>
                     <li class="memorial">Брезинский Борис</li>
-                    <li>Бровин Александр</li>
-                    <li>Бышкин Сергей</li>
-                    <li>Ванжа Александр</li>
-                    <li>Волков Юрий</li>
                 </ul>
             </div>
         `;
         container.appendChild(listSlide1);
 
-        // --- Список 2 ---
-        const listSlide2 = document.createElement('div');
-        listSlide2.className = 'slide text-slide list-slide';
-        listSlide2.innerHTML = `
+    // --- Список 2 ---
+const listSlide2 = document.createElement('div');
+listSlide2.className = 'slide text-slide list-slide';
+listSlide2.innerHTML = `
+    <div>
+        <ul>
+            <li>Бровин Александр</li>
+            <li>Бышкин Сергей</li>
+            <li>Ванжа Александр</li>
+            <li>Вертков Алексей</li>
+            <li>Волков Юрий</li>
+            <li>Волков Юрий</li>
+            <li>Воробьёв Василий</li>
+            <li>Воронко Владимир</li>
+            <li>Гирнык Сергей</li>
+        </ul>
+    </div>
+`;
+container.appendChild(listSlide2);
+
+
+        // --- Список 3 ---
+        const listSlide3 = document.createElement('div');
+        listSlide3.className = 'slide text-slide list-slide';
+        listSlide3.innerHTML = `
             <div>
                 <ul>
-                    <li>Волков Юрий</li>
-                    <li>Воробьёв Василий</li>
-                    <li>Воронко Владимир</li>
-                    <li>Гирнык Сергей</li>
                     <li class="memorial">Голубенко Александр</li>
                     <li>Голубь Николай</li>
                     <li>Грицына Виктор</li>
@@ -558,12 +621,12 @@
                 </ul>
             </div>
         `;
-        container.appendChild(listSlide2);
+        container.appendChild(listSlide3);
 
-        // --- Список 3 ---
-        const listSlide3 = document.createElement('div');
-        listSlide3.className = 'slide text-slide list-slide';
-        listSlide3.innerHTML = `
+        // --- Список 4 ---
+        const listSlide4 = document.createElement('div');
+        listSlide4.className = 'slide text-slide list-slide';
+        listSlide4.innerHTML = `
             <div>
                 <ul>
                     <li>Забелин Евгений</li>
@@ -574,33 +637,6 @@
                     <li class="memorial">Инопин Андрей</li>
                     <li>Калентьев Сергей</li>
                     <li>Кнутарев Сергей</li>
-                    <li>Кныш Анатолий</li>
-                    <li>Козачёк Александр</li>
-                    <li>Кокадий Виталий</li>
-                    <li>Котляр Владимир</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide3);
-
-        // --- Список 4 ---
-        const listSlide4 = document.createElement('div');
-        listSlide4.className = 'slide text-slide list-slide';
-        listSlide4.innerHTML = `
-            <div>
-                <ul>
-                    <li class="memorial">Кощий Евгений</li>
-                    <li>Кладковой Петр</li>
-                    <li>Клименко Александр</li>
-                    <li class="memorial">Климко Сергей</li>
-                    <li>Клушин Николай</li>
-                    <li class="memorial">Кропотов Николай</li>
-                    <li>Куприянов Анатолий</li>
-                    <li>Линенко-Мельников Игорь</li>
-                    <li class="memorial">Лихачёв Николай</li>
-                    <li>Ляшко Юрий</li>
-                    <li>Маслов Василий</li>
-                    <li>Мироненко Виктор</li>
                 </ul>
             </div>
         `;
@@ -612,18 +648,14 @@
         listSlide5.innerHTML = `
             <div>
                 <ul>
-                    <li>Михайленко Александр</li>
-                    <li class="memorial">Мишура Николай</li>
-                    <li class="memorial">Морозов Иван</li>
-                    <li class="memorial">Нагайченко Валерий</li>
-                    <li>Никитин Аркадий</li>
-                    <li>Онищенко Евгений</li>
-                    <li>Орлов Сергей</li>
-                    <li class="memorial">Панасенко Александр</li>
-                    <li>Парфёнов Анатолий</li>
-                    <li class="memorial">Пащенко Сергей</li>
-                    <li>Пащук Сергей</li>
-                    <li>Поляков Николай</li>
+                    <li>Кныш Анатолий</li>
+                    <li>Козачёк Александр</li>
+                    <li>Кокадий Виталий</li>
+                    <li>Котляр Владимир</li>
+                    <li class="memorial">Кощий Евгений</li>
+                    <li>Кладковой Петр</li>
+                    <li>Клименко Александр</li>
+                    <li class="memorial">Климко Сергей</li>
                 </ul>
             </div>
         `;
@@ -635,18 +667,14 @@
         listSlide6.innerHTML = `
             <div>
                 <ul>
-                    <li class="memorial">Плахотник Владимир</li>
-                    <li class="memorial">Райдам Дмитрий</li>
-                    <li class="memorial">Рыбалов Валинтин</li>
-                    <li>Руденко Сергей</li>
-                    <li>Русинов Николай</li>
-                    <li>Рябчиков Дмитрий</li>
-                    <li>Санин Анатолий</li>
-                    <li>Симоненко Александр</li>
-                    <li>Сотников Владимир</li>
-                    <li class="memorial">Сушко Иван</li>
-                    <li>Талецкий Юрий</li>
-                    <li>Тарасов Александр</li>
+                    <li>Клушин Николай</li>
+                    <li class="memorial">Кропотов Николай</li>
+                    <li>Куприянов Анатолий</li>
+                    <li>Линенко-Мельников Игорь</li>
+                    <li class="memorial">Лихачёв Николай</li>
+                    <li>Ляшко Юрий</li>
+                    <li>Маслов Василий</li>
+                    <li>Мироненко Виктор</li>
                 </ul>
             </div>
         `;
@@ -658,18 +686,14 @@
         listSlide7.innerHTML = `
             <div>
                 <ul>
-                    <li>Третьяк Игорь</li>
-                    <li class="memorial">Толкунов Михаил</li>
-                    <li>Туркин Анатолий</li>
-                    <li>Туркин Юрий</li>
-					<li>Филипенко Александр</li>
-                    <li class="memorial">Черный Александр</li>
-                    <li>Шатнев Михаил</li>
-                    <li>Шергин Георгий</li>
-                    <li>Штангеев Борис</li>
-                    <li>Шолкин Александр</li>
-                    <li class="memorial">Шулаев Геннадий</li>
-                    <li>Щербинка Сергей</li>
+                    <li>Михайленко Александр</li>
+                    <li class="memorial">Мишура Николай</li>
+                    <li class="memorial">Морозов Иван</li>
+                    <li class="memorial">Нагайченко Валерий</li>
+                    <li>Никитин Аркадий</li>
+                    <li>Онищенко Евгений</li>
+                    <li>Орлов Сергей</li>
+                    <li class="memorial">Панасенко Александр</li>
                 </ul>
             </div>
         `;
@@ -681,12 +705,73 @@
         listSlide8.innerHTML = `
             <div>
                 <ul>
+                    <li>Парфёнов Анатолий</li>
+                    <li class="memorial">Пащенко Сергей</li>
+                    <li>Пащук Сергей</li>
+                    <li>Поляков Николай</li>
+                    <li class="memorial">Плахотник Владимир</li>
+                    <li class="memorial">Райдам Дмитрий</li>
+                    <li class="memorial">Рыбалов Валинтин</li>
+                    <li>Руденко Сергей</li>
+                </ul>
+            </div>
+        `;
+        container.appendChild(listSlide8);
+
+        // --- Список 9 ---
+        const listSlide9 = document.createElement('div');
+        listSlide9.className = 'slide text-slide list-slide';
+        listSlide9.innerHTML = `
+            <div>
+                <ul>
+                    <li>Русинов Николай</li>
+                    <li>Рябчиков Дмитрий</li>
+                    <li>Санин Анатолий</li>
+                    <li>Симоненко Александр</li>
+                    <li>Сотников Владимир</li>
+                    <li class="memorial">Сушко Иван</li>
+                    <li>Талецкий Юрий</li>
+                    <li>Тарасов Александр</li>
+                </ul>
+            </div>
+        `;
+        container.appendChild(listSlide9);
+
+        // --- Список 10 ---
+        const listSlide10 = document.createElement('div');
+        listSlide10.className = 'slide text-slide list-slide';
+        listSlide10.innerHTML = `
+            <div>
+                <ul>
+                    <li>Третьяк Игорь</li>
+                    <li class="memorial">Толкунов Михаил</li>
+                    <li>Туркин Анатолий</li>
+                    <li>Туркин Юрий</li>
+                    <li class="memorial">Филипенко Александр</li>
+                    <li class="memorial">Черный Александр</li>
+                    <li>Шатнев Михаил</li>
+                    <li>Шергин Георгий</li>
+                </ul>
+            </div>
+        `;
+        container.appendChild(listSlide10);
+
+        // --- Список 11 ---
+        const listSlide11 = document.createElement('div');
+        listSlide11.className = 'slide text-slide list-slide';
+        listSlide11.innerHTML = `
+            <div>
+                <ul>
+                    <li>Штангеев Борис</li>
+                    <li>Шолкин Александр</li>
+                    <li class="memorial">Шулаев Геннадий</li>
+                    <li>Щербинка Сергей</li>
                     <li>Юрченко Валерий</li>
                     <li>Яровой Николай</li>
                 </ul>
             </div>
         `;
-        container.appendChild(listSlide8);
+        container.appendChild(listSlide11);
 
         // --- Финальный слайд ---
         const finalSlide = document.createElement('div');
