@@ -289,7 +289,31 @@
 	/* Мобильная версия */
 @media (max-width: 600px) {
 
-    /* Текстовые слайды — чтобы ничего не обрезалось */
+    /* --- СТАРТОВЫЙ ЭКРАН --- */
+    #start-screen .start-box {
+        padding: 20px 15px;
+        text-align: center;
+    }
+
+    #start-screen h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        padding: 0 5px;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    #start-screen p {
+        font-size: 1.2rem;
+    }
+
+    #start-btn {
+        font-size: 1.4rem;
+        padding: 10px 20px;
+    }
+
+
+    /* --- ТЕКСТОВЫЕ СЛАЙДЫ --- */
     .text-slide {
         max-height: 100vh;
         overflow-y: auto;
@@ -301,7 +325,8 @@
         overflow-y: auto;
     }
 
-    /* Заглавный слайд — чтобы "Встреча однокурсников" не обрезался */
+
+    /* --- ЗАГЛАВНЫЙ СЛАЙД --- */
     .title-slide {
         padding: 10px;
     }
@@ -309,7 +334,7 @@
     .title-slide h1 {
         font-size: 2.4rem; /* вместо 5rem */
         line-height: 1.2;
-        padding: 0 5px; /* защита от обрезания слева/справа */
+        padding: 0 5px; /* защита от обрезания */
         white-space: normal;
         word-break: break-word;
     }
@@ -318,21 +343,22 @@
         font-size: 1.2rem;
     }
 
-    /* Вступительные слайды */
+
+    /* --- ВСТУПИТЕЛЬНЫЕ СЛАЙДЫ --- */
     .intro-slide {
         font-size: 1.6rem;
         line-height: 1.7;
         padding: 20px;
     }
 
-    /* Заголовок списков */
+
+    /* --- СПИСКИ --- */
     .list-slide h2 {
         font-size: 2rem;
         margin-bottom: 20px;
         padding: 0;
     }
 
-    /* Списки — одна колонка */
     .list-slide ul {
         columns: 1;
         font-size: 1.4rem;
@@ -366,33 +392,33 @@
         color: #ffd700;
     }
 
-    /* Панель управления */
-    .controls {
+
+    /* --- ПАНЕЛЬ УПРАВЛЕНИЯ --- */
+    #controls {
         bottom: 8px;
         padding: 0 10px;
-        width: calc(100% - 20px); /* чтобы не вылазило за края */
+        width: calc(100% - 20px);
     }
 
-    /* Все кнопки: Назад, Играть, Вперёд */
-    #prevBtn, #playPauseBtn, #nextBtn {
+    #prev-btn, #play-pause-btn, #next-btn {
         font-size: 1.2rem;
         padding: 6px 10px;
         min-width: 60px;
     }
 
-    /* Счётчик слайдов */
-    #slideCounter {
+    #counter {
         font-size: 1.1rem;
         padding: 4px 8px;
         margin: 0 6px;
     }
 
-    /* Более мягкая анимация на телефоне */
+
+    /* --- МЯГКАЯ АНИМАЦИЯ --- */
     .slide {
         transform: translateY(26px) scale(0.95);
         transition:
             opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-            transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+            transform 1.4s cubic-bezier(0.22, 1, 0, 0.36, 1);
     }
 
     .slide.active {
