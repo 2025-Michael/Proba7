@@ -425,6 +425,29 @@
         transform: translateY(0) scale(1);
     }
 }
+/* Исчезающий слайд */
+.slide.fade-out {
+    opacity: 0;
+    transform: translateY(40px) scale(0.94);
+    transition:
+        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Базовое состояние слайда перед появлением */
+.slide {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.97);
+    transition:
+        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Активный слайд — плавное появление */
+.slide.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
 
     </style>
 </head>
@@ -568,16 +591,17 @@
         container.innerHTML = '';
 
         // --- Заглавный слайд ---
-        const titleSlide = document.createElement('div');
-        titleSlide.className = 'slide text-slide title-slide';
-        titleSlide.innerHTML = `
-            <div>
-                <h1>Встреча выпускников ФТФ-79 ХГУ</h1>
-                <h1>25 лет спустя</h1>
-                <p class="date-place">22 мая 2004 года, Харьков</p>
-            </div>
-        `;
-        container.appendChild(titleSlide);
+const titleSlide = document.createElement('div');
+titleSlide.className = 'slide text-slide title-slide active';
+titleSlide.innerHTML = `
+    <div class="title-content">
+        <h1>Встреча выпускников ФТФ-79 ХГУ</h1>
+        <h1>25 лет спустя</h1>
+        <p class="date-place">22 мая 2004 года, Харьков</p>
+    </div>
+`;
+container.appendChild(titleSlide);
+
 
         // --- Вступление 1 ---
         const intro1 = document.createElement('div');
@@ -789,7 +813,7 @@ container.appendChild(listSlide2);
                     <li>Поляков Николай</li>
                     <li class="memorial">Плахотник Владимир</li>
                     <li class="memorial">Райдам Дмитрий</li>
-                    <li class="memorial">Рыбалов Валинтин</li>
+                    <li class="memorial">Рыбалов Валентин</li>
                     <li>Руденко Сергей</li>
                 </ul>
             </div>
@@ -872,12 +896,31 @@ container.appendChild(listSlide2);
     // ==========================================
 
     function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[index].classList.add('active');
+    if (index === currentSlide) return;
+
+    const oldSlide = slides[currentSlide];
+    const newSlide = slides[index];
+
+    // 1) запускаем анимацию исчезновения старого слайда
+    oldSlide.classList.remove('active');
+    oldSlide.classList.add('fade-out');
+
+    // 2) ждём завершения анимации
+    oldSlide.addEventListener('transitionend', function handler() {
+        oldSlide.removeEventListener('transitionend', handler);
+
+        // убираем fade-out
+        oldSlide.classList.remove('fade-out');
+
+        // 3) показываем новый слайд
+        newSlide.classList.add('active');
+
+        // обновляем счётчик
         currentSlide = index;
         counter.textContent = `${index + 1} / ${slides.length}`;
         updateProgress();
-    }
+    });
+}
 
     function updateProgress() {
         const progress = ((currentSlide + 1) / slides.length) * 100;
