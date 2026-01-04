@@ -1069,7 +1069,15 @@ container.appendChild(listSlide2);
             }
         }
     }
-
+	
+	// --- Разрешение на запуск музыки при первом клике ---
+document.addEventListener('click', function enableAudio() {
+    const audio = document.getElementById('bg-music');
+    if (audio && audio.paused) {
+        audio.play().catch(() => {});
+    }
+    document.removeEventListener('click', enableAudio);
+});
 </script>
 
 </body>
