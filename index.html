@@ -3,33 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   	
-	<!-- Manifest --> 
-	<link rel="manifest" href="manifest.json">
-	
-	<!-- Favicon -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  
-  <title>Слайд-шоу встречи однокурсников</title>
-
+    <title>Слайд-шоу встречи однокурсников</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #1a1a1a;
             color: #fff;
             overflow-x: hidden;
-            overflow-y: auto;
         }
-
         #start-screen {
             position: fixed;
             top: 0;
@@ -42,11 +28,9 @@
             justify-content: center;
             z-index: 3000;
         }
-
         #start-screen.hidden {
             display: none;
         }
-
         .start-box {
             background: white;
             padding: 80px 100px;
@@ -54,19 +38,16 @@
             text-align: center;
             box-shadow: 0 30px 80px rgba(0,0,0,0.4);
         }
-
         .start-box h1 {
             color: #667eea;
             font-size: 3.5rem;
             margin-bottom: 20px;
         }
-
         .start-box p {
             color: #666;
             font-size: 1.3rem;
             margin-bottom: 50px;
         }
-
         #start-btn {
             background: #22c55e;
             color: white;
@@ -78,19 +59,16 @@
             transition: all 0.3s;
             box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
         }
-
         #start-btn:hover {
             background: #16a34a;
             transform: scale(1.05);
         }
-
         #loading-msg {
             margin-top: 20px;
             color: #999;
             font-size: 1rem;
             display: none;
         }
-
         #slideshow-container {
             width: 100vw;
             height: 100vh;
@@ -100,36 +78,23 @@
             justify-content: center;
             background: #000;
         }
-
-    /* Кинематографичный fade + zoom + fade-up */
-.slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* Исходное состояние */
-    opacity: 0;
-    transform: translateY(20px) scale(0.97);
-    transition:
-        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Активный слайд */
-.slide.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    z-index: 1;
-}
-
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px) scale(0.97);
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
         .slide.active {
+            display: flex;
             opacity: 1;
+            transform: translateY(0) scale(1);
             z-index: 1;
         }
-
         .slide img {
             width: 100%;
             height: auto;
@@ -137,102 +102,82 @@
             object-fit: contain;
             box-shadow: 0 20px 60px rgba(0,0,0,0.8);
         }
-
         .text-slide {
-            text-align: center;
             padding: 40px 60px;
             overflow-y: auto;
             max-height: 90vh;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-        .text-slide > div {
-            max-height: 100%;
-            overflow-y: auto;
+        .text-slide-content {
+            text-align: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
-        .title-slide h1 {
+        .title-slide .text-slide-content h1 {
             font-size: 5rem;
             margin-bottom: 30px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .title-slide p {
+        .title-slide .text-slide-content p {
             font-size: 2.2rem;
             color: #ccc;
         }
-
-        .intro-slide {
+        .intro-slide .text-slide-content {
             font-size: 2rem;
             line-height: 1.8;
             color: #e0e0e0;
-            max-width: 1200px;
-            margin: 0 auto;
         }
-
-        .list-slide h2 {
+        .list-slide .text-slide-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .list-slide .text-slide-content h2 {
             font-size: 3rem;
             margin-bottom: 40px;
             color: #667eea;
+            text-align: center;
         }
-
-        .list-slide ul {
-    text-align: left;
-    font-size: 1.3rem;
-    line-height: 1.9;
-    list-style: none;
-    columns: 2;
-    column-gap: 60px;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-
-    /* Запрещаем переносы */
-    word-break: keep-all;
-    overflow-wrap: normal;
-    white-space: normal;
-    hyphens: none;
-}
-
-
-        .list-slide li {
+        .list-slide .text-slide-content ul {
+            text-align: left;
+            font-size: 1.3rem;
+            line-height: 1.9;
+            list-style: none;
+            columns: 2;
+            column-gap: 60px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .list-slide .text-slide-content li {
             margin-bottom: 8px;
-            padding-left: 30px;
+            padding-left: 22px;
             position: relative;
             break-inside: avoid;
         }
-
-        /* Единый стиль для всех кружков */
-.list-slide li {
-    position: relative;
-    padding-left: 22px;
-}
-
-.list-slide li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    top: 0.2rem;
-    color: #667eea; /* твой оригинальный цвет */
-    font-size: 1.6rem;
-    line-height: 1;
-}
-
-
-        .list-slide li.memorial {
+        .list-slide .text-slide-content li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            top: 0.2rem;
+            color: #667eea;
+            font-size: 1.6rem;
+            line-height: 1;
+        }
+        .list-slide .text-slide-content li.memorial {
             color: #ffd700;
             font-weight: 600;
         }
-
-        .list-slide li.memorial:before {
+        .list-slide .text-slide-content li.memorial::before {
             content: "✝";
             color: #ffd700;
         }
-
         #controls {
             position: fixed;
             bottom: 10px;
@@ -245,13 +190,10 @@
             gap: 20px;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(10px);
         }
-
         #controls.visible {
             display: flex;
         }
-
         button {
             background: #667eea;
             border: none;
@@ -262,19 +204,16 @@
             font-size: 1.1rem;
             transition: all 0.3s;
         }
-
         button:hover {
             background: #764ba2;
             transform: scale(1.1);
         }
-
         #counter {
             color: #fff;
             font-size: 1.2rem;
             min-width: 100px;
             text-align: center;
         }
-
         #progress-bar {
             position: fixed;
             bottom: 0;
@@ -285,800 +224,182 @@
             display: none;
             z-index: 999;
         }
-
         #progress-bar.visible {
             display: block;
         }
-
         #progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
             width: 0%;
             transition: width 0.5s;
         }
-	/* Мобильная версия */
-@media (max-width: 600px) {
-
-    /* --- СТАРТОВЫЙ ЭКРАН --- */
-    #start-screen .start-box {
-        padding: 20px 15px;
-        text-align: center;
-    }
-
-    #start-screen h1 {
-        font-size: 2.2rem;
-        line-height: 1.2;
-        padding: 0 5px;
-        white-space: normal;
-        word-break: break-word;
-    }
-
-    #start-screen p {
-        font-size: 1.2rem;
-    }
-
-    #start-btn {
-        font-size: 1.4rem;
-        padding: 10px 20px;
-    }
-
-
-    /* --- ТЕКСТОВЫЕ СЛАЙДЫ --- */
-    .text-slide {
-        max-height: 100vh;
-        overflow-y: auto;
-        padding: 20px 15px; /* уменьшено, чтобы не было переполнения */
-    }
-
-    .text-slide > div {
-        max-height: 100%;
-        overflow-y: auto;
-    }
-
-
-    /* --- ЗАГЛАВНЫЙ СЛАЙД --- */
-    .title-slide {
-        padding: 10px;
-    }
-
-    .title-slide h1 {
-        font-size: 2.4rem; /* вместо 5rem */
-        line-height: 1.2;
-        padding: 0 5px; /* защита от обрезания */
-        white-space: normal;
-        word-break: break-word;
-    }
-
-    .title-slide p {
-        font-size: 1.2rem;
-    }
-
-
-    /* --- ВСТУПИТЕЛЬНЫЕ СЛАЙДЫ --- */
-    .intro-slide {
-        font-size: 1.6rem;
-        line-height: 1.7;
-        padding: 20px;
-    }
-
-
-    /* --- СПИСКИ --- */
-    .list-slide h2 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-        padding: 0;
-    }
-
-    .list-slide ul {
-        columns: 1;
-        font-size: 1.4rem;
-        line-height: 2.0;
-        padding: 0 10px;
-
-        word-break: keep-all;
-        overflow-wrap: normal;
-        white-space: normal;
-        hyphens: none;
-    }
-
-    .list-slide li {
-        margin-bottom: 12px;
-        position: relative;
-        padding-left: 22px;
-    }
-
-    .list-slide li::before {
-        content: "•";
-        position: absolute;
-        left: 0;
-        top: 0.2rem;
-        color: #667eea;
-        font-size: 1.6rem;
-        line-height: 1;
-    }
-
-    .list-slide li.memorial::before {
-        content: "✝";
-        color: #ffd700;
-    }
-
-
-    /* --- ПАНЕЛЬ УПРАВЛЕНИЯ --- */
-    #controls {
-        bottom: 8px;
-        padding: 0 10px;
-        width: calc(100% - 20px);
-    }
-
-    #prev-btn, #play-pause-btn, #next-btn {
-        font-size: 1.2rem;
-        padding: 6px 10px;
-        min-width: 60px;
-    }
-
-    #counter {
-        font-size: 1.1rem;
-        padding: 4px 8px;
-        margin: 0 6px;
-    }
-
-
-    /* --- МЯГКАЯ АНИМАЦИЯ --- */
-    .slide {
-        transform: translateY(26px) scale(0.95);
-        transition:
-            opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-            transform 1.4s cubic-bezier(0.22, 1, 0, 0.36, 1);
-    }
-
-    .slide.active {
-        transform: translateY(0) scale(1);
-    }
-}
-/* Исчезающий слайд */
-.slide.fade-out {
-    opacity: 0;
-    transform: translateY(40px) scale(0.94);
-    transition:
-        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Базовое состояние слайда перед появлением */
-.slide {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.97);
-    transition:
-        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Активный слайд — плавное появление */
-.slide.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
+        .restart-btn {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.4);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 9999;
+            transition: background 0.3s;
+        }
+        .restart-btn:hover {
+            background: rgba(0,0,0,0.6);
+        }
+        @media (max-width: 600px) {
+            .start-box {
+                padding: 20px 15px;
+            }
+            .start-box h1 {
+                font-size: 2.2rem;
+            }
+            .title-slide .text-slide-content h1 {
+                font-size: 2.4rem;
+            }
+            .intro-slide .text-slide-content {
+                font-size: 1.6rem;
+                padding: 20px;
+            }
+            .list-slide .text-slide-content ul {
+                columns: 1;
+                font-size: 1.4rem;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <!-- Стартовый экран -->
-    <div id="start-screen">
-        <div class="start-box">
-            <h1>📸 Встреча однокурсников</h1>
-            <p>Слайд-шоу готово к показу</p>
-            <button id="start-btn">▶ Начать показ</button>
-            <div id="loading-msg">Загрузка файлов...</div>
-        </div>
+<button id="restartBtn" class="restart-btn">⟲</button>
+<div id="start-screen">
+    <div class="start-box">
+        <h1>📸 Встреча однокурсников</h1>
+        <p>Слайд-шоу готово к показу</p>
+        <button id="start-btn">▶ Начать показ</button>
+        <div id="loading-msg">Загрузка файлов...</div>
     </div>
-
-    <!-- Контейнер слайдов -->
-    <div id="slideshow-container"></div>
-
-    <!-- Панель управления -->
-    <div id="controls">
-        <button id="prev-btn">⏮ Назад</button>
-        <button id="play-pause-btn">⏸ Пауза</button>
-        <button id="next-btn">Вперёд ⏭</button>
-        <div id="counter">1 / 1</div>
-    </div>
-
-    <!-- Прогресс-бар -->
-    <div id="progress-bar">
-        <div id="progress-fill"></div>
-    </div>
-
-    <!-- Музыка -->
-    <audio id="background-music"></audio>
+</div>
+<div id="slideshow-container"></div>
+<div id="controls">
+    <button id="prev-btn">⏮ Назад</button>
+    <button id="play-pause-btn">⏸ Пауза</button>
+    <button id="next-btn">Вперёд ⏭</button>
+    <div id="counter">1 / 1</div>
+</div>
+<div id="progress-bar"><div id="progress-fill"></div></div>
+<audio id="background-music"></audio>
 <script>
-    // ==========================================
-    // НАСТРОЙКИ: Укажите имена ваших файлов
-    // ==========================================
+const photoFiles=['P5220444.JPG','P5220445.JPG','P5220446.JPG','P5220447.JPG','P5220448.JPG','P5220449.JPG','P5220450.JPG','P5220451.JPG','P5220452.JPG','P5220453.JPG','P5220454.JPG','P5220455.JPG','P5220456.JPG','P5220457.JPG','P5220458.JPG','P5220459.JPG','P5220460.JPG','P5220461.JPG','P5220462.JPG','P5220463.JPG','P5220464.JPG','P5220465.JPG','P5220466.JPG','P5220467.JPG','P5220468.JPG','P5220469.JPG','P5220470.JPG','P5220471.JPG','P5220472.JPG','P5220473.JPG','P5220474.JPG','P5220475.JPG','P5220476.JPG','P5220477.JPG','P5220478.JPG','P5220479.JPG','P5220480.JPG','P5220481.JPG','P5220482.JPG','P5220483.JPG','P5220484.JPG','P5220485.JPG','P5220486.JPG','P5220487.JPG','P5220488.JPG','P5220489.JPG','P5220490.JPG','P5220491.JPG','P5220492.JPG','P5220493.JPG','P5220494.JPG','P5220495.JPG','P5220496.JPG','P5220497.JPG','P5220498.JPG','P5220499.JPG','P5220500.JPG','P5220501.JPG','P5220503.JPG','P5220504.JPG','P5220505.JPG','P5220506.JPG','P5220507.JPG','P5220508.JPG','P5220509.JPG','P5220510.JPG','P5220511.JPG','P5220512.JPG','P5220513.JPG','P5220514.JPG','P5220515.JPG','P5220516.JPG','P5220517.JPG','P5220518.JPG','P5220519.JPG','P5220520.JPG','P5220521.JPG','P5220522.JPG','P5220523.JPG','P5220524.JPG','P5220525.JPG','P5220526.JPG','P5220527.JPG','P5220528.JPG','P5220529.JPG','P5220530.JPG','P5230531.JPG','P5230533.JPG','P5230540.JPG','P5230541.JPG','P5230542.JPG','P5230543.JPG','P5230544.JPG','P5230545.jpg','P5230546.JPG','P5230547.JPG','P5230548.JPG','P5230549.JPG','P5230550.JPG','P5230551.JPG','P5230552.JPG','P5230553.JPG','P5230554.JPG','P5230555.JPG','P5230556.JPG'];
+const musicFiles=['mozart-eine-kleine-nachtmusik-serenade-no-13-kv-525-175691.mp3','20-vot_uhodit_nashe_vremya.mp3','17-spokoino_druzhishe_spokoino.mp3','country-nights-441168.mp3','mozart-rondo-alla-turca-concert-grand-version-227458.mp3','1-04 Ob-La-Di, Ob-La-Da.mp3','legacy-of-brahms-hungarian-dance-no5-fun-background-dance-music-191255.mp3','19-napolnim_muzykoi_serdtca.mp3','symphonie-der-menschheit-201942.mp3','1-01 Back In The USSR.mp3','09-pesnya_aljpinistov.mp3','1-11 Blackbird.mp3','my artist friend.mp3','mozart-requiem-dies-irae-k-626-175976.mp3'];
+photoFiles.sort();
+const slideTime=20000;
+let slides=[],currentSlide=0,isPlaying=false,timer=null,musicIdx=0;
+const startScreen=document.getElementById('start-screen'),container=document.getElementById('slideshow-container'),controls=document.getElementById('controls'),progressBar=document.getElementById('progress-bar'),progressFill=document.getElementById('progress-fill'),counter=document.getElementById('counter'),playPauseBtn=document.getElementById('play-pause-btn'),music=document.getElementById('background-music'),startBtn=document.getElementById('start-btn'),loadingMsg=document.getElementById('loading-msg');
 
-    // Список фотографий (автоматически сортируются)
-    const photoFiles = [
-        'P5220444.JPG','P5220445.JPG','P5220446.JPG','P5220447.JPG','P5220448.JPG','P5220449.JPG',
-        'P5220450.JPG','P5220451.JPG','P5220452.JPG','P5220453.JPG','P5220454.JPG','P5220455.JPG',
-        'P5220456.JPG','P5220457.JPG','P5220458.JPG','P5220459.JPG','P5220460.JPG','P5220461.JPG',
-        'P5220462.JPG','P5220463.JPG','P5220464.JPG','P5220465.JPG','P5220466.JPG','P5220467.JPG',
-        'P5220468.JPG','P5220469.JPG','P5220470.JPG','P5220471.JPG','P5220472.JPG','P5220473.JPG',
-        'P5220474.JPG','P5220475.JPG','P5220476.JPG','P5220477.JPG','P5220478.JPG','P5220479.JPG',
-        'P5220480.JPG','P5220481.JPG','P5220482.JPG','P5220483.JPG','P5220484.JPG','P5220485.JPG',
-        'P5220486.JPG','P5220487.JPG','P5220488.JPG','P5220489.JPG','P5220490.JPG','P5220491.JPG',
-        'P5220492.JPG','P5220493.JPG','P5220494.JPG','P5220495.JPG','P5220496.JPG','P5220497.JPG',
-        'P5220498.JPG','P5220499.JPG','P5220500.JPG','P5220501.JPG','P5220503.JPG','P5220504.JPG',
-        'P5220505.JPG','P5220506.JPG','P5220507.JPG','P5220508.JPG','P5220509.JPG','P5220510.JPG',
-        'P5220511.JPG','P5220512.JPG','P5220513.JPG','P5220514.JPG','P5220515.JPG','P5220516.JPG',
-        'P5220517.JPG','P5220518.JPG','P5220519.JPG','P5220520.JPG','P5220521.JPG','P5220522.JPG',
-        'P5220523.JPG','P5220524.JPG','P5220525.JPG','P5220526.JPG','P5220527.JPG','P5220528.JPG',
-        'P5220529.JPG','P5220530.JPG','P5230531.JPG','P5230533.JPG','P5230540.JPG','P5230541.JPG',
-        'P5230542.JPG','P5230543.JPG','P5230544.JPG','P5230545.jpg','P5230546.JPG','P5230547.JPG',
-        'P5230548.JPG','P5230549.JPG','P5230550.JPG','P5230551.JPG','P5230552.JPG','P5230553.JPG',
-        'P5230554.JPG','P5230555.JPG','P5230556.JPG'
-    ];
+function createSlides(){
+container.innerHTML='';
 
-    photoFiles.sort();
+const addTextSlide=(slideClass,content)=>{
+const slide=document.createElement('div');
+slide.className='slide text-slide '+slideClass;
+const contentDiv=document.createElement('div');
+contentDiv.className='text-slide-content';
+contentDiv.innerHTML=content;
+slide.appendChild(contentDiv);
+container.appendChild(slide);
+};
 
-    // Музыка
-    const musicFiles = [
-        'mozart-eine-kleine-nachtmusik-serenade-no-13-kv-525-175691.mp3',
-        '20-vot_uhodit_nashe_vremya.mp3',
-        '17-spokoino_druzhishe_spokoino.mp3',
-        'country-nights-441168.mp3',
-        'mozart-rondo-alla-turca-concert-grand-version-227458.mp3',
-        '1-04 Ob-La-Di, Ob-La-Da.mp3',
-        'legacy-of-brahms-hungarian-dance-no5-fun-background-dance-music-191255.mp3',
-        '19-napolnim_muzykoi_serdtca.mp3',
-        'symphonie-der-menschheit-201942.mp3',
-        '1-01 Back In The USSR.mp3',
-        '09-pesnya_aljpinistov.mp3',
-        '1-11 Blackbird.mp3',
-        'my artist friend.mp3',
-		'mozart-requiem-dies-irae-k-626-175976.mp3'
-    ];
+addTextSlide('title-slide','<h1>Встреча выпускников ФТФ-79 ХГУ</h1><h1>25 лет спустя</h1><p>22 мая 2004 года, Харьков</p>');
+addTextSlide('intro-slide','Дорогие друзья!<br><br>Тут представлены фотографии с нашей встречи через четверть века после окончания университета.<br>И всё это время мы шли разными дорогами,<br>но начинали-то с одной аудитории.');
+addTextSlide('intro-slide','Здесь мы снова собрались вместе,<br>Чтобы вспомнить,<br>Узнать друг друга,<br>Улыбнуться,<br>И просто побыть рядом.');
 
-    const slideDuration = 20; // секунд
-    const slideTime = slideDuration * 1000;
+photoFiles.forEach(p=>{
+const slide=document.createElement('div');
+slide.className='slide';
+const img=document.createElement('img');
+img.src=p;
+slide.appendChild(img);
+container.appendChild(slide);
+});
 
-    let slides = [];
-    let currentSlide = 0;
-    let isPlaying = false;
-    let timer = null;
-    let currentMusicIndex = 0;
+addTextSlide('intro-slide','А теперь давайте вспомним всех,<br>кто прошёл этот путь вместе с нами.<br><br>Наших друзей, коллег, однокурсников.');
+addTextSlide('intro-slide','Каждый из нас оставил свой след<br>в истории нашего курса.<br><br>Светлая память тем, кто ушёл...');
+addTextSlide('list-slide','<h2>Наши однокурсники</h2><ul><li>Авилов Анатолий</li><li>Андрусенко Николай</li><li>Антонов Сергей</li><li>Бабенко Виктор</li><li>Баранник Евгений</li><li>Богданов Евгений</li><li>Бодров Александр</li><li class="memorial">Брезинский Борис</li></ul>');
+addTextSlide('list-slide','<ul><li>Бровин Александр</li><li>Бышкин Сергей</li><li>Ванжа Александр</li><li>Вертков Алексей</li><li>Волков Юрий</li><li>Волков Юрий</li><li>Воробьёв Василий</li><li>Воронко Владимир</li><li>Гирнык Сергей</li></ul>');
+addTextSlide('list-slide','<ul><li class="memorial">Голубенко Александр</li><li>Голубь Николай</li><li>Грицына Виктор</li><li class="memorial">Деревянко Валерий</li><li>Дзеньковский Владимир</li><li>Дубинко Владимир</li><li class="memorial">Дубина Владимир</li><li>Жучков Сергей</li></ul>');
+addTextSlide('list-slide','<ul><li>Забелин Евгений</li><li>Зинченко Василий</li><li>Иванов Павел</li><li>Иванчук Василий</li><li>Ивашов Николай</li><li class="memorial">Инопин Андрей</li><li>Калентьев Сергей</li><li>Кнутарев Сергей</li></ul>');
+addTextSlide('list-slide','<ul><li>Кныш Анатолий</li><li>Козачёк Александр</li><li>Кокадий Виталий</li><li>Котляр Владимир</li><li class="memorial">Кощий Евгений</li><li>Кладковой Петр</li><li>Клименко Александр</li><li class="memorial">Климко Сергей</li></ul>');
+addTextSlide('list-slide','<ul><li>Клушин Николай</li><li class="memorial">Кропотов Николай</li><li>Куприянов Анатолий</li><li>Линенко-Мельников Игорь</li><li class="memorial">Лихачёв Николай</li><li>Ляшко Юрий</li><li>Маслов Василий</li><li>Мироненко Виктор</li></ul>');
+addTextSlide('list-slide','<ul><li>Михайленко Александр</li><li class="memorial">Мишура Николай</li><li class="memorial">Морозов Иван</li><li class="memorial">Нагайченко Валерий</li><li>Никитин Аркадий</li><li>Онищенко Евгений</li><li>Орлов Сергей</li><li class="memorial">Панасенко Александр</li></ul>');
+addTextSlide('list-slide','<ul><li>Парфёнов Анатолий</li><li class="memorial">Пащенко Сергей</li><li>Пащук Сергей</li><li>Поляков Николай</li><li class="memorial">Плахотник Владимир</li><li class="memorial">Райдам Дмитрий</li><li class="memorial">Рыбалов Валентин</li><li>Руденко Сергей</li></ul>');
+addTextSlide('list-slide','<ul><li>Русинов Николай</li><li>Рябчиков Дмитрий</li><li>Санин Анатолий</li><li>Симоненко Александр</li><li>Сотников Владимир</li><li class="memorial">Сушко Иван</li><li>Талецкий Юрий</li><li>Тарасов Александр</li></ul>');
+addTextSlide('list-slide','<ul><li>Третьяк Игорь</li><li class="memorial">Толкунов Михаил</li><li>Туркин Анатолий</li><li>Туркин Юрий</li><li>Филипенко Александр</li><li class="memorial">Черный Александр</li><li>Шатнев Михаил</li><li>Шергин Георгий</li></ul>');
+addTextSlide('list-slide','<ul><li>Штангеев Борис</li><li>Шолкин Александр</li><li class="memorial">Шулаев Геннадий</li><li>Щербинка Сергей</li><li>Юрченко Валерий</li><li>Яровой Николай</li></ul>');
+addTextSlide('title-slide','<h1>Спасибо за внимание!</h1><p>До новых встреч!</p>');
 
-    const startScreen = document.getElementById('start-screen');
-    const container = document.getElementById('slideshow-container');
-    const controls = document.getElementById('controls');
-    const progressBar = document.getElementById('progress-bar');
-    const progressFill = document.getElementById('progress-fill');
-    const counter = document.getElementById('counter');
-    const playPauseBtn = document.getElementById('play-pause-btn');
-    const music = document.getElementById('background-music');
-    const startBtn = document.getElementById('start-btn');
-    const loadingMsg = document.getElementById('loading-msg');
-
-    // ==========================================
-    // Запуск
-    // ==========================================
-
-    startBtn.addEventListener('click', function () {
-        loadingMsg.style.display = 'block';
-        startBtn.disabled = true;
-
-        setTimeout(() => {
-            createSlides();
-            startScreen.classList.add('hidden');
-            controls.classList.add('visible');
-            progressBar.classList.add('visible');
-            showSlide(0);
-            play();
-
-            if (musicFiles.length > 0) {
-                music.src = musicFiles[0];
-                music.play().catch(() => {
-                    document.body.addEventListener('click', () => music.play(), { once: true });
-                });
-            }
-        }, 500);
-    });
-
-    // ==========================================
-    // Переключение музыки
-    // ==========================================
-
-    music.addEventListener('ended', function () {
-        currentMusicIndex = (currentMusicIndex + 1) % musicFiles.length;
-        music.src = musicFiles[currentMusicIndex];
-        music.play().catch(() => {});
-    });
-
-    // ==========================================
-    // СОЗДАНИЕ СЛАЙДОВ (исправленная версия)
-    // ==========================================
-
-    function createSlides() {
-        container.innerHTML = '';
-
-        // --- Заглавный слайд ---
-const titleSlide = document.createElement('div');
-titleSlide.className = 'slide text-slide title-slide active';
-titleSlide.innerHTML = `
-    <div class="title-content">
-        <h1>Встреча выпускников ФТФ-79 ХГУ</h1>
-        <h1>25 лет спустя</h1>
-        <p class="date-place">22 мая 2004 года, Харьков</p>
-    </div>
-`;
-container.appendChild(titleSlide);
-
-
-        // --- Вступление 1 ---
-        const intro1 = document.createElement('div');
-        intro1.className = 'slide text-slide intro-slide';
-        intro1.innerHTML = `
-            <div>
-                Дорогие друзья!<br><br>
-                Тут представлены фотографии с нашей встречи через четверть века после окончания университета.<br>
-                И всё это время мы шли разными дорогами,<br>
-                но начинали-то с одной аудитории.
-            </div>
-        `;
-        container.appendChild(intro1);
-
-        // --- Вступление 2 ---
-        const intro2 = document.createElement('div');
-        intro2.className = 'slide text-slide intro-slide';
-        intro2.innerHTML = `
-            <div>
-                Здесь мы снова собрались вместе,<br>
-                Чтобы вспомнить,<br>
-                Узнать друг друга,<br>
-                Улыбнуться,<br>
-                И просто побыть рядом.
-            </div>
-        `;
-        container.appendChild(intro2);
-
-        // --- Фотографии ---
-        photoFiles.forEach(photoFile => {
-            const photoSlide = document.createElement('div');
-            photoSlide.className = 'slide';
-            const img = document.createElement('img');
-            img.src = photoFile;
-            img.onerror = () => console.error('Не удалось загрузить фото:', photoFile);
-            photoSlide.appendChild(img);
-            container.appendChild(photoSlide);
-        });
-
-        // --- Слайд перед списками 1 ---
-        const preList1 = document.createElement('div');
-        preList1.className = 'slide text-slide intro-slide';
-        preList1.innerHTML = `
-            <div>
-                А теперь давайте вспомним всех,<br>
-                кто прошёл этот путь вместе с нами.<br><br>
-                Наших друзей, коллег, однокурсников.
-            </div>
-        `;
-        container.appendChild(preList1);
-
-        // --- Слайд перед списками 2 ---
-        const preList2 = document.createElement('div');
-        preList2.className = 'slide text-slide intro-slide';
-        preList2.innerHTML = `
-            <div>
-                Каждый из нас оставил свой след<br>
-                в истории нашего курса.<br><br>
-                Светлая память тем, кто ушёл...
-            </div>
-        `;
-        container.appendChild(preList2);
-
-                // --- Список 1 ---
-        const listSlide1 = document.createElement('div');
-        listSlide1.className = 'slide text-slide list-slide';
-        listSlide1.innerHTML = `
-            <div>
-                <h2>Наши однокурсники</h2>
-                <ul>
-                    <li>Авилов Анатолий</li>
-                    <li>Андрусенко Николай</li>
-                    <li>Антонов Сергей</li>
-                    <li>Бабенко Виктор</li>
-                    <li>Баранник Евгений</li>
-                    <li>Богданов Евгений</li>
-                    <li>Бодров Александр</li>
-                    <li class="memorial">Брезинский Борис</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide1);
-
-    // --- Список 2 ---
-const listSlide2 = document.createElement('div');
-listSlide2.className = 'slide text-slide list-slide';
-listSlide2.innerHTML = `
-    <div>
-        <ul>
-            <li>Бровин Александр</li>
-            <li>Бышкин Сергей</li>
-            <li>Ванжа Александр</li>
-            <li>Вертков Алексей</li>
-            <li>Волков Юрий</li>
-            <li>Волков Юрий</li>
-            <li>Воробьёв Василий</li>
-            <li>Воронко Владимир</li>
-            <li>Гирнык Сергей</li>
-        </ul>
-    </div>
-`;
-container.appendChild(listSlide2);
-
-
-        // --- Список 3 ---
-        const listSlide3 = document.createElement('div');
-        listSlide3.className = 'slide text-slide list-slide';
-        listSlide3.innerHTML = `
-            <div>
-                <ul>
-                    <li class="memorial">Голубенко Александр</li>
-                    <li>Голубь Николай</li>
-                    <li>Грицына Виктор</li>
-                    <li class="memorial">Деревянко Валерий</li>
-                    <li>Дзеньковский Владимир</li>
-                    <li>Дубинко Владимир</li>
-                    <li class="memorial">Дубина Владимир</li>
-                    <li>Жучков Сергей</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide3);
-
-        // --- Список 4 ---
-        const listSlide4 = document.createElement('div');
-        listSlide4.className = 'slide text-slide list-slide';
-        listSlide4.innerHTML = `
-            <div>
-                <ul>
-                    <li>Забелин Евгений</li>
-                    <li>Зинченко Василий</li>
-                    <li>Иванов Павел</li>
-                    <li>Иванчук Василий</li>
-                    <li>Ивашов Николай</li>
-                    <li class="memorial">Инопин Андрей</li>
-                    <li>Калентьев Сергей</li>
-                    <li>Кнутарев Сергей</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide4);
-
-        // --- Список 5 ---
-        const listSlide5 = document.createElement('div');
-        listSlide5.className = 'slide text-slide list-slide';
-        listSlide5.innerHTML = `
-            <div>
-                <ul>
-                    <li>Кныш Анатолий</li>
-                    <li>Козачёк Александр</li>
-                    <li>Кокадий Виталий</li>
-                    <li>Котляр Владимир</li>
-                    <li class="memorial">Кощий Евгений</li>
-                    <li>Кладковой Петр</li>
-                    <li>Клименко Александр</li>
-                    <li class="memorial">Климко Сергей</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide5);
-
-        // --- Список 6 ---
-        const listSlide6 = document.createElement('div');
-        listSlide6.className = 'slide text-slide list-slide';
-        listSlide6.innerHTML = `
-            <div>
-                <ul>
-                    <li>Клушин Николай</li>
-                    <li class="memorial">Кропотов Николай</li>
-                    <li>Куприянов Анатолий</li>
-                    <li>Линенко-Мельников Игорь</li>
-                    <li class="memorial">Лихачёв Николай</li>
-                    <li>Ляшко Юрий</li>
-                    <li>Маслов Василий</li>
-                    <li>Мироненко Виктор</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide6);
-
-        // --- Список 7 ---
-        const listSlide7 = document.createElement('div');
-        listSlide7.className = 'slide text-slide list-slide';
-        listSlide7.innerHTML = `
-            <div>
-                <ul>
-                    <li>Михайленко Александр</li>
-                    <li class="memorial">Мишура Николай</li>
-                    <li class="memorial">Морозов Иван</li>
-                    <li class="memorial">Нагайченко Валерий</li>
-                    <li>Никитин Аркадий</li>
-                    <li>Онищенко Евгений</li>
-                    <li>Орлов Сергей</li>
-                    <li class="memorial">Панасенко Александр</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide7);
-
-        // --- Список 8 ---
-        const listSlide8 = document.createElement('div');
-        listSlide8.className = 'slide text-slide list-slide';
-        listSlide8.innerHTML = `
-            <div>
-                <ul>
-                    <li>Парфёнов Анатолий</li>
-                    <li class="memorial">Пащенко Сергей</li>
-                    <li>Пащук Сергей</li>
-                    <li>Поляков Николай</li>
-                    <li class="memorial">Плахотник Владимир</li>
-                    <li class="memorial">Райдам Дмитрий</li>
-                    <li class="memorial">Рыбалов Валентин</li>
-                    <li>Руденко Сергей</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide8);
-
-        // --- Список 9 ---
-        const listSlide9 = document.createElement('div');
-        listSlide9.className = 'slide text-slide list-slide';
-        listSlide9.innerHTML = `
-            <div>
-                <ul>
-                    <li>Русинов Николай</li>
-                    <li>Рябчиков Дмитрий</li>
-                    <li>Санин Анатолий</li>
-                    <li>Симоненко Александр</li>
-                    <li>Сотников Владимир</li>
-                    <li class="memorial">Сушко Иван</li>
-                    <li>Талецкий Юрий</li>
-                    <li>Тарасов Александр</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide9);
-
-        // --- Список 10 ---
-        const listSlide10 = document.createElement('div');
-        listSlide10.className = 'slide text-slide list-slide';
-        listSlide10.innerHTML = `
-            <div>
-                <ul>
-                    <li>Третьяк Игорь</li>
-                    <li class="memorial">Толкунов Михаил</li>
-                    <li>Туркин Анатолий</li>
-                    <li>Туркин Юрий</li>
-					<li>Филипенко Александр</li>
-                    <li class="memorial">Черный Александр</li>
-                    <li>Шатнев Михаил</li>
-                    <li>Шергин Георгий</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide10);
-
-        // --- Список 11 ---
-        const listSlide11 = document.createElement('div');
-        listSlide11.className = 'slide text-slide list-slide';
-        listSlide11.innerHTML = `
-            <div>
-                <ul>
-                    <li>Штангеев Борис</li>
-                    <li>Шолкин Александр</li>
-                    <li class="memorial">Шулаев Геннадий</li>
-                    <li>Щербинка Сергей</li>
-                    <li>Юрченко Валерий</li>
-                    <li>Яровой Николай</li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(listSlide11);
-
-        // --- Финальный слайд ---
-        const finalSlide = document.createElement('div');
-        finalSlide.className = 'slide text-slide title-slide';
-        finalSlide.innerHTML = `
-            <div>
-                <h1>Спасибо за внимание!</h1>
-                <p>До новых встреч!</p>
-            </div>
-        `;
-        container.appendChild(finalSlide);
-
-        // --- Обновление списка слайдов ---
-        slides = document.querySelectorAll('.slide');
-        counter.textContent = `1 / ${slides.length}`;
-    }
-
-    // ==========================================
-    // Показ слайда
-    // ==========================================
-
-    function showSlide(index) {
-    if (index === currentSlide) return;
-
-    const oldSlide = slides[currentSlide];
-    const newSlide = slides[index];
-
-    // 1) запускаем анимацию исчезновения старого слайда
-    oldSlide.classList.remove('active');
-    oldSlide.classList.add('fade-out');
-
-    // 2) ждём завершения анимации
-    oldSlide.addEventListener('transitionend', function handler() {
-        oldSlide.removeEventListener('transitionend', handler);
-
-        // убираем fade-out
-        oldSlide.classList.remove('fade-out');
-
-        // 3) показываем новый слайд
-        newSlide.classList.add('active');
-
-        // обновляем счётчик
-        currentSlide = index;
-        counter.textContent = `${index + 1} / ${slides.length}`;
-        updateProgress();
-    });
+slides=document.querySelectorAll('.slide');
+counter.textContent=`1 / ${slides.length}`;
 }
 
-    function updateProgress() {
-        const progress = ((currentSlide + 1) / slides.length) * 100;
-        progressFill.style.width = progress + '%';
-    }
+function showSlide(i){
+if(!slides.length)return;
+slides.forEach(s=>{s.classList.remove('active');s.style.display='none'});
+currentSlide=i;
+slides[currentSlide].style.display='flex';
+setTimeout(()=>slides[currentSlide].classList.add('active'),50);
+counter.textContent=`${currentSlide+1} / ${slides.length}`;
+progressFill.style.width=((currentSlide+1)/slides.length*100)+'%';
+}
 
-    function nextSlide() {
-	        if (currentSlide < slides.length - 1) {
-            showSlide(currentSlide + 1);
-        } else {
-            showSlide(0);
-        }
-    }
+function nextSlide(){showSlide((currentSlide+1)%slides.length)}
+function prevSlide(){showSlide((currentSlide-1+slides.length)%slides.length)}
+function play(){if(isPlaying)return;isPlaying=true;playPauseBtn.textContent='⏸ Пауза';timer=setInterval(nextSlide,slideTime);music.play().catch(()=>{})}
+function pause(){isPlaying=false;playPauseBtn.textContent='▶ Играть';clearInterval(timer);music.pause()}
 
-    // ==========================================
-    // Переключение назад
-    // ==========================================
+music.addEventListener('ended',()=>{musicIdx=(musicIdx+1)%musicFiles.length;music.src=musicFiles[musicIdx];music.play().catch(()=>{})});
 
-    function prevSlide() {
-        if (currentSlide > 0) {
-            showSlide(currentSlide - 1);
-        } else {
-            showSlide(slides.length - 1);
-        }
-    }
+document.getElementById('prev-btn').onclick=prevSlide;
+document.getElementById('next-btn').onclick=nextSlide;
+playPauseBtn.onclick=()=>isPlaying?pause():play();
 
-    // ==========================================
-    // Автоплей
-    // ==========================================
+document.getElementById('restartBtn').onclick=()=>{
+pause();
+currentSlide=0;
+music.pause();
+music.currentTime=0;
+musicIdx=0;
+slides.forEach(s=>{s.classList.remove('active');s.style.display='none'});
+startScreen.classList.remove('hidden');
+startScreen.style.display='flex';
+container.style.display='none';
+controls.classList.remove('visible');
+progressBar.classList.remove('visible');
+startBtn.disabled=false;
+loadingMsg.style.display='none';
+};
 
-    function play() {
-        isPlaying = true;
-        playPauseBtn.textContent = '⏸ Пауза';
-        timer = setInterval(nextSlide, slideTime);
-
-        if (music.src && music.paused) {
-            music.play().catch(() => {});
-        }
-    }
-
-    function pause() {
-        isPlaying = false;
-        playPauseBtn.textContent = '▶ Играть';
-        clearInterval(timer);
-
-        if (music.src && !music.paused) {
-            music.pause();
-        }
-    }
-
-    // ==========================================
-    // Кнопки управления
-    // ==========================================
-
-    document.getElementById('prev-btn').addEventListener('click', () => {
-        prevSlide();
-        if (isPlaying) {
-            pause();
-            play();
-        }
-    });
-
-    document.getElementById('next-btn').addEventListener('click', () => {
-        nextSlide();
-        if (isPlaying) {
-            pause();
-            play();
-        }
-    });
-
-    playPauseBtn.addEventListener('click', () => {
-        if (isPlaying) pause();
-        else play();
-    });
-
-    // ==========================================
-    // Управление с клавиатуры
-    // ==========================================
-
-    document.addEventListener('keydown', (e) => {
-        if (!startScreen.classList.contains('hidden')) return;
-
-        if (e.key === 'ArrowLeft') {
-            prevSlide();
-            if (isPlaying) {
-                pause();
-                play();
-            }
-        }
-        if (e.key === 'ArrowRight') {
-            nextSlide();
-            if (isPlaying) {
-                pause();
-                play();
-            }
-        }
-        if (e.key === ' ') {
-            e.preventDefault();
-            if (isPlaying) pause();
-            else play();
-        }
-    });
-
-    // ==========================================
-    // Свайпы для мобильных устройств
-    // ==========================================
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-    }, false);
-
-    document.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, false);
-
-    function handleSwipe() {
-        const dx = touchEndX - touchStartX;
-
-        if (Math.abs(dx) < 50) return;
-
-        if (dx < 0) {
-            nextSlide();
-            if (isPlaying) {
-                pause();
-                play();
-            }
-        } else {
-            prevSlide();
-            if (isPlaying) {
-                pause();
-                play();
-            }
-        }
-    }
-	
-	// --- Разрешение на запуск музыки при первом клике ---
-document.addEventListener('click', function enableAudio() {
-    const audio = document.getElementById('bg-music');
-    if (audio && audio.paused) {
-        audio.play().catch(() => {});
-    }
-    document.removeEventListener('click', enableAudio);
-});
+startBtn.onclick=()=>{
+loadingMsg.style.display='block';
+startBtn.disabled=true;
+setTimeout(()=>{
+createSlides();
+startScreen.classList.add('hidden');
+startScreen.style.display='none';
+container.style.display='block';
+controls.classList.add('visible');
+progressBar.classList.add('visible');
+showSlide(0);
+if(musicFiles.length>0){
+musicIdx=0;
+music.src=musicFiles[0];
+music.play().catch(()=>{});
+}
+play();
+loadingMsg.style.display='none';
+},300);
+};
 </script>
-
 </body>
 </html>
