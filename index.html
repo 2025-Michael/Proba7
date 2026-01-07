@@ -306,27 +306,32 @@
         margin-bottom: 10px;
     }
     
-    /* ПАНЕЛЬ УПРАВЛЕНИЯ - ТОЛЬКО ДЛЯ МОБИЛЬНЫХ */
-    #controls {
-        bottom: 8px;
-        padding: 8px 10px;
-        width: calc(100% - 20px);
-        left: 10px;
-        transform: none;
-        justify-content: space-between;
-    }
-    #prev-btn, #play-pause-btn, #next-btn {
-        font-size: 1rem;
-        padding: 8px 12px;
-        min-width: auto;
-        flex: 0 0 auto;
-    }
-    #counter {
-        font-size: 1rem;
-        padding: 4px 8px;
-        margin: 0 4px;
-        flex: 0 1 auto;
-    }
+   /* ПАНЕЛЬ УПРАВЛЕНИЯ - ТОЛЬКО ДЛЯ МОБИЛЬНЫХ */
+#controls {
+    bottom: 8px;
+    padding: 6px 8px;
+    width: calc(100% - 20px);
+    left: 10px;
+    transform: none;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+}
+#prev-btn, #play-pause-btn, #next-btn {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+    min-width: 50px;
+    flex: 0 0 auto;
+}
+#counter {
+    font-size: 0.95rem;
+    padding: 4px 6px;
+    margin: 0;
+    flex: 1 1 auto;
+    text-align: center;
+    white-space: nowrap;
+} 
 } 
     </style>
 </head>
