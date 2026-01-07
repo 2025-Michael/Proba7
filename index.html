@@ -306,6 +306,62 @@
         margin-bottom: 10px;
     }
 } 
+ /* --- ПАНЕЛЬ УПРАВЛЕНИЯ --- */
+    #controls {
+        bottom: 8px;
+        padding: 0 10px;
+        width: calc(100% - 20px);
+    }
+
+    #prev-btn, #play-pause-btn, #next-btn {
+        font-size: 1.2rem;
+        padding: 6px 10px;
+        min-width: 60px;
+    }
+
+    #counter {
+        font-size: 1.1rem;
+        padding: 4px 8px;
+        margin: 0 6px;
+    }
+
+
+    /* --- МЯГКАЯ АНИМАЦИЯ --- */
+    .slide {
+        transform: translateY(26px) scale(0.95);
+        transition:
+            opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 1.4s cubic-bezier(0.22, 1, 0, 0.36, 1);
+    }
+
+    .slide.active {
+        transform: translateY(0) scale(1);
+    }
+}
+/* Исчезающий слайд */
+.slide.fade-out {
+    opacity: 0;
+    transform: translateY(40px) scale(0.94);
+    transition:
+        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Базовое состояние слайда перед появлением */
+.slide {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.97);
+    transition:
+        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Активный слайд — плавное появление */
+.slide.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
     </style>
 </head>
 <body>
